@@ -1,15 +1,15 @@
 import React from 'react'
 import Breweries from './Breweries'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { get20BreweriesByPage } from '../helpers/apiCalls'
 jest.mock('../helpers/apiCalls')
 
 describe('Breweries Component', () => {
-
-	it('Should display a list of breweries upon load', () => {
-		const breweries = [
+	let breweries
+	beforeEach(() => {
+		breweries = [
 			{
 				"id": 1234,
 				"name": "Casey and Khalid's Backup Plan",
@@ -41,6 +41,9 @@ describe('Breweries Component', () => {
 				"updated_at": "always"
 			}
 		]
+	})
+
+	it('Should display a list of breweries upon load', () => {
 		render(
 			<MemoryRouter>
 				<Breweries
@@ -55,6 +58,24 @@ describe('Breweries Component', () => {
 
 		expect(title1).toBeInTheDocument()
 		expect(title2).toBeInTheDocument()
+	})
+
+	it('Should fire the correct method when direction buttons are clicked', () => {
+		const changePage = jest.fn()
+		render(
+			<MemoryRouter>
+				<Breweries
+					breweries={breweries}
+					changePage={changePage}
+				/>
+			</MemoryRouter>
+		)
+
+		const forwardButton = screen.getByRole('button', { name: /next 20/i })
+		const backButton = screen.getByRole('button', { name: /previous 20/i })
+		fireEvent.click(forwardButton)
+		fireEvent.click(backButton)
+		expect(changePage).toBeCalledTimes(2)
 	})
 
 })
