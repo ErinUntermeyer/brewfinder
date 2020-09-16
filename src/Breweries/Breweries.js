@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {useState, useEffect } from 'react'
 import './Breweries.scss'
 
-import { breweries } from '../helpers/data'
+import { get20BreweriesByPage } from '../helpers/apiCalls'
 
 const Breweries = () => {
+	const [breweries, setBreweries] = useState([])
+	const [error, setError] = useState('')
+	const [pageNumber, setPageNumber] = useState(1)
+
+	const getBreweryList = pageNumber => {
+		get20BreweriesByPage(pageNumber)
+			.then(data => {
+				setBreweries(data)
+			})
+			.catch(error => {
+				setError(error)
+			})
+	}
+
+	useEffect(() => {
+		getBreweryList(pageNumber)
+	}, [])
 
 	const makeList = breweries => {
 		return breweries.map(brewery => {
