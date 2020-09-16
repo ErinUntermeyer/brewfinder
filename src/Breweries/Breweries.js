@@ -1,7 +1,6 @@
 import React, {useState, useEffect } from 'react'
-import './Breweries.scss'
-
 import { get20BreweriesByPage } from '../helpers/apiCalls'
+import './Breweries.scss'
 
 const Breweries = () => {
 	const [breweries, setBreweries] = useState([])
@@ -18,8 +17,17 @@ const Breweries = () => {
 			})
 	}
 
+	const displayError = message => {
+		setError(message)
+		setTimeout(() => {
+			setError('')
+		}, 3000)
+	}
+
 	const changePage = direction => {
-		if (direction === 'back' && pageNumber > 1) {
+		if (direction === 'back' && pageNumber === 1) {
+			displayError('You\'re on the first page!')
+		} else if (direction === 'back' && pageNumber > 1) {
 			setPageNumber(pageNumber - 1)
 		} else if (direction === 'forward') {
 			setPageNumber(pageNumber + 1)
@@ -56,6 +64,7 @@ const Breweries = () => {
 				onClick={(e) => changePage('forward')}>
 				Next 20
 			</button>
+			<p>{error}</p>
 		</div>
 	)
 }
