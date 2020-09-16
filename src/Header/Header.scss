@@ -2,14 +2,30 @@
 
 Header {
 	display: flex;
+	justify-content: space-between;
 	background-color: $grey;
 	height: 12vh;
 }
 
+Header h1 {
+	@include headerFont(54px);
+}
+
+Header h2 {
+	@include textFont(16px);
+	color: $teal;
+	font-style: italic;
+}
+
+.slogan {
+	display: flex;
+	flex-direction: column;
+	margin-left: 40px;
+	align-self: center;
+}
+
 .title-box {
 	display: flex;
-	align-items: center;
-	margin-left: 40px;
 }
 
 .logo {
@@ -17,6 +33,27 @@ Header {
 	margin: 10px;
 }
 
-.app-title {
-	@include headerFont(54px);
+.cheers {
+	height: 4vh;
+	margin: 0 10px -10px 0;
+}
+
+nav {
+	display: flex;
+	align-items: flex-end;
+}
+
+a {
+	@include textFont(26px);
+	text-decoration: none;
+	color: $golden;
+	margin: 15px;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 3px $golden);
+	}
+}
+
+.favorite-box {
+	align-self: center;
 }
