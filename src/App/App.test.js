@@ -1,7 +1,7 @@
 import React from 'react'
 import App from './App'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { get20BreweriesByPage } from '../helpers/apiCalls'
 jest.mock('../helpers/apiCalls')
@@ -56,12 +56,21 @@ describe('App Component', () => {
 	})
 
 	it('Should fetch a brewery list upon load', async () => {
-		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		const { findByRole } = render(<MemoryRouter><App /></MemoryRouter>)
 		const title1 = await findByRole('heading', { name: /casey and khalid\'s backup plan/i })
 		const title2 = await findByRole('heading', { name: /diners, drive-ins and devs/i })
 		expect(title1).toBeInTheDocument()
 		expect(title2).toBeInTheDocument()
+	})
+
+	it.skip('Should allow a user to view previous/next 20 breweries', async () => {
+		//researching aftereach cleanup
+		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
+		render(<MemoryRouter><App /></MemoryRouter>)
+		const forwardButton = screen.getByRole('button', { name: /next 20/i })
+		fireEvent.click(forwardButton)
+		expect(get20BreweriesByPage).toBeCalledTimes(2)
 	})
 
 })
