@@ -74,12 +74,19 @@ describe('App Component', () => {
 	})
 
 	it('Should display warning if there is no previous page', async () => {
-		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
 		const backButton = screen.getByRole('button', { name: /previous 20/i })
 		fireEvent.click(backButton)
 		const warning = await findByText(/you\'re on the first page!/i)
 		expect(warning).toBeInTheDocument()
+	})
+
+	it('Should display error if fetch is not successful', async () => {
+		get20BreweriesByPage.mockRejectedValue(404)
+		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
+		const error = await findByText(/i\'m sorry, we could not retrieve any breweries at this time. please try again later!/i)
+		expect(error).toBeInTheDocument()
 	})
 
 })
