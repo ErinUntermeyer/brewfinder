@@ -2,6 +2,7 @@
 
 Header {
 	display: flex;
+	justify-content: space-between;
 	background-color: $grey;
 	height: 12vh;
 }
@@ -19,4 +20,20 @@ Header {
 
 .app-title {
 	@include headerFont(54px);
+}
+
+nav {
+	display: flex;
+	align-items: flex-end;
+}
+
+a {
+	@include textFont(26px);
+	text-decoration: none;
+	color: $golden;
+	margin: 15px;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 3px $golden);
+	}
 }
