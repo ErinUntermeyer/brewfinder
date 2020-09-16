@@ -6,6 +6,7 @@ import '@testing-library/jest-dom'
 
 describe('Breweries Component', () => {
 	let breweries
+	
 	beforeEach(() => {
 		breweries = [
 			{
