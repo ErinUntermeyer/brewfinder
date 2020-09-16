@@ -24,7 +24,7 @@ const Header = () => {
 				</NavLink>
 				<NavLink to="/favorites">
 					<div className="favorite-box">
-						<img src={cheers} alt="Two beer mugs clicking together" className="cheers" />
+						<img src={cheers} alt="Two glasses clinking together" className="cheers" />
 						favorites
 					</div>
 				</NavLink>
