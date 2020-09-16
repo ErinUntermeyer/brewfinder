@@ -1,8 +1,8 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import beerMug from '../assets/beer.png'
 import cheers from '../assets/cheers.png'
 import './Header.scss'
-import { NavLink } from 'react-router-dom'
 
 const Header = () => {
 	return (
