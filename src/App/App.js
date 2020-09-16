@@ -41,6 +41,8 @@ class App extends Component {
 			this.displayWarning('You\'re on the first page!')
 		} else if (direction === 'back' && this.state.pageNumber > 1) {
 			this.setState({ pageNumber: this.state.pageNumber - 1 })
+		} else if (direction === 'forward' && this.state.breweries.length < 20) {
+			this.displayWarning('You\'re on the last page!')
 		} else if (direction === 'forward') {
 			this.setState({ pageNumber: this.state.pageNumber + 1 })
 		}

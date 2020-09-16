@@ -1,7 +1,7 @@
 import React from 'react'
 import App from './App'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent, findByText } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { get20BreweriesByPage } from '../helpers/apiCalls'
 jest.mock('../helpers/apiCalls')
@@ -64,6 +64,13 @@ describe('App Component', () => {
 		expect(title2).toBeInTheDocument()
 	})
 
+	it('Should display error if fetch is not successful', async () => {
+		get20BreweriesByPage.mockRejectedValue(404)
+		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
+		const error = await findByText(/i\'m sorry, we could not retrieve any breweries at this time. please try again later!/i)
+		expect(error).toBeInTheDocument()
+	})
+
 	it.skip('Should allow a user to view previous/next 20 breweries', async () => {
 		//researching aftereach cleanup
 		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
@@ -82,11 +89,13 @@ describe('App Component', () => {
 		expect(warning).toBeInTheDocument()
 	})
 
-	it('Should display error if fetch is not successful', async () => {
-		get20BreweriesByPage.mockRejectedValue(404)
+	it('Should display warning if there is no next page', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
-		const error = await findByText(/i\'m sorry, we could not retrieve any breweries at this time. please try again later!/i)
-		expect(error).toBeInTheDocument()
+		const forwardButton = screen.getByRole('button', { name: /next 20/i })
+		fireEvent.click(forwardButton)
+		const warning2 = await findByText(/you\'re on the last page!/i)
+		expect(warning2).toBeInTheDocument()
 	})
 
 })
