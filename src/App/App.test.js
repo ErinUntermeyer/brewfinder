@@ -1,7 +1,7 @@
 import React from 'react'
 import App from './App'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, findByText } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { get20BreweriesByPage } from '../helpers/apiCalls'
 jest.mock('../helpers/apiCalls')
@@ -71,6 +71,15 @@ describe('App Component', () => {
 		const forwardButton = screen.getByRole('button', { name: /next 20/i })
 		fireEvent.click(forwardButton)
 		expect(get20BreweriesByPage).toBeCalledTimes(2)
+	})
+
+	it('Should display warning if there is no previous page', async () => {
+		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
+		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
+		const backButton = screen.getByRole('button', { name: /previous 20/i })
+		fireEvent.click(backButton)
+		const warning = await findByText(/you\'re on the first page!/i)
+		expect(warning).toBeInTheDocument()
 	})
 
 })
