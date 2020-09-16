@@ -1,1 +1,30 @@
 @import '../styles/_variables.scss';
+
+.Breweries {
+	margin: 75px 150px 0 150px;
+	display: grid;
+	align-items: center;
+	grid-gap: 20px;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+	background: $grey;
+}
+
+.Breweries h3 {
+	color: $orangeRed;
+	font-size: 22px;
+	text-align: start;
+}
+
+.Breweries p {
+	color: $bone;
+	font-size: 16px;
+	text-align: end;
+	margin-left: 20px;
+}
+
+.brewery-box {
+	align-items: center;
+	overflow: scroll;
+	height: inherit;
+}
