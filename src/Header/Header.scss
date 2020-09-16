@@ -1,0 +1,22 @@
+@import '../styles/_variables.scss';
+
+Header {
+	display: flex;
+	background-color: $grey;
+	height: 12vh;
+}
+
+.title-box {
+	display: flex;
+	align-items: center;
+	margin-left: 40px;
+}
+
+.logo {
+	height: 4vh;
+	margin: 10px;
+}
+
+.app-title {
+	@include headerFont(54px);
+}
