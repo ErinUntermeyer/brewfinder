@@ -28,3 +28,18 @@
 	overflow: scroll;
 	height: inherit;
 }
+
+.back-button, .forward-button {
+	@include textFont(20px);
+	color: $golden;
+	outline: none;
+	background: $grey;
+	margin: 10px;
+
+	&:hover {
+		color: $grey;
+		background: $golden;
+		cursor: pointer;
+		font-weight: bold;
+	}
+}

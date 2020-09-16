@@ -15,9 +15,13 @@ const Breweries = () => {
 	})
 	
 	return (
-		<section className="Breweries">
-			{breweriesList}
-		</section>
+		<div>
+			<section className="Breweries">
+				{breweriesList}
+			</section>
+			<button className="back-button">Previous 20</button>
+			<button className="forward-button">Next 20</button>
+		</div>
 	)
 }
 

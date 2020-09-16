@@ -5,7 +5,7 @@
 // colors
 $golden: #DEA54B;
 $orangeRed: #FE5F55;
-$grey: #36393B;
+$grey: #2c2e30;
 $teal: #0FA3B1;
 $bone: #E5DCC5;
 
@@ -18,6 +18,5 @@ $bone: #E5DCC5;
 
 @mixin textFont($fontSize) {
 	font-family: 'Merriweather', serif;
-	color: $grey;
 	font-size: $fontSize;
 }
