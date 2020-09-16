@@ -4,6 +4,7 @@ import './Breweries.scss'
 
 const Breweries = () => {
 	const [breweries, setBreweries] = useState([])
+	const [warning, setWarning] = useState('')
 	const [error, setError] = useState('')
 	const [pageNumber, setPageNumber] = useState(1)
 
@@ -13,20 +14,20 @@ const Breweries = () => {
 				setBreweries(data)
 			})
 			.catch(error => {
-				setError(error)
+				setError('I\'m sorry, we could not retrieve any breweries at this time. Please try again later!')
 			})
 	}
 
-	const displayError = message => {
-		setError(message)
+	const displayWarning = message => {
+		setWarning(message)
 		setTimeout(() => {
-			setError('')
+			setWarning('')
 		}, 3000)
 	}
 
 	const changePage = direction => {
 		if (direction === 'back' && pageNumber === 1) {
-			displayError('You\'re on the first page!')
+			displayWarning('You\'re on the first page!')
 		} else if (direction === 'back' && pageNumber > 1) {
 			setPageNumber(pageNumber - 1)
 		} else if (direction === 'forward') {
@@ -50,6 +51,7 @@ const Breweries = () => {
 	}, [pageNumber])
 
 	return (
+		error ? <h1 className="error">{error}</h1> : (
 		<div>
 			<section className="Breweries">
 				{makeList(breweries)}
@@ -66,6 +68,7 @@ const Breweries = () => {
 			</button>
 			<p>{error}</p>
 		</div>
+		)
 	)
 }
 
