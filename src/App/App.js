@@ -1,20 +1,15 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.scss'
 
-class App extends Component {
-	constructor() {
-		super()
-		this.state = {}
-	}
+const App = () => {
 
-  render() {
-    return (
+	return (
 		<div className="App">
-      <header className="App-header">
+			<header className="App-header">
 				Hello
-      </header>
-    </div>
-		)}
+			</header>
+		</div>
+	)
 }
 
 export default App
