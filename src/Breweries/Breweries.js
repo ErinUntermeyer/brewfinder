@@ -1,13 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './Breweries.scss'
 
 import { breweries } from '../helpers/data'
 
 const Breweries = () => {
-	console.log(breweries.length)
+	// have 'breweries' be props passed in from App - any array of breweries will display the same. so you can filter
+	const breweriesList = breweries.map(brewery => {
+		return (
+			<article className="brewery-box" key={brewery.id}>
+				<h3>{brewery.name}</h3>
+				<p>{brewery.city}, CO</p>
+			</article>
+		)
+	})
+	
 	return (
-		<div className="Breweries">
-		</div>
+		<section className="Breweries">
+			{breweriesList}
+		</section>
 	)
 }
 
