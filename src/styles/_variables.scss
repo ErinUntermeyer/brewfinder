@@ -1,0 +1,23 @@
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+
+// colors
+$golden: #DEA54B;
+$orangeRed: #FE5F55;
+$grey: #36393B;
+$teal: #0FA3B1;
+$bone: #E5DCC5;
+
+// mixin
+@mixin headerFont($fontSize) {
+	font-family: 'Cabin Sketch', cursive;
+	color: $golden;
+	font-size: $fontSize;
+}
+
+@mixin textFont($fontSize) {
+	font-family: 'Merriweather', serif;
+	color: $grey;
+	font-size: $fontSize;
+}
