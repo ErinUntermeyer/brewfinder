@@ -62,7 +62,6 @@ class App extends Component {
 				<Route exact path="/" render={() => (
 						<Breweries
 							breweries={this.state.breweries}
-							pageNumber={this.state.pageNumber}
 							changePage={this.changePage}
 						/>
 					)}
