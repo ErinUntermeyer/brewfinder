@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { get20BreweriesByPage } from '../helpers/apiCalls'
 import Header from '../Header/Header'
 import Breweries from '../Breweries/Breweries'
+import Filter from '../Filter/Filter'
 import Favorites from '../Favorites/Favorites'
 import './App.scss'
 
@@ -18,15 +19,15 @@ class App extends Component {
 		}
 	}
 
-	componentDidMount() {
-		this.getBreweries()
-	}
+	// componentDidMount() {
+	// 	this.getBreweries()
+	// }
 
-	componentDidUpdate(prevProps, prevState) {
-		if (this.state.pageNumber !== prevState.pageNumber) {
-			this.getBreweries()
-		}
-	}
+	// componentDidUpdate(prevProps, prevState) {
+	// 	if (this.state.pageNumber !== prevState.pageNumber) {
+	// 		this.getBreweries()
+	// 	}
+	// }
 
 	getBreweries = () => {
 		get20BreweriesByPage(this.state.pageNumber)
@@ -74,13 +75,16 @@ class App extends Component {
 			<main>
 				{ this.state.error ? <h1 className="error">{this.state.error}</h1> : (
 				<Route exact path="/" render={() => (
-					<Breweries
-						breweries={this.state.breweries}
-						changePage={this.changePage}
-						favorites={this.state.favorites}
-						addFavorite={this.addFavorite}
-						removeFavorite={this.removeFavorite}
-					/>
+					<>
+						<Filter />
+						<Breweries
+							breweries={this.state.breweries}
+							changePage={this.changePage}
+							favorites={this.state.favorites}
+							addFavorite={this.addFavorite}
+							removeFavorite={this.removeFavorite}
+						/>
+					</>
 				)} />
 				) }
 				{ this.state.warning ? <p>{this.state.warning}</p> : null }
