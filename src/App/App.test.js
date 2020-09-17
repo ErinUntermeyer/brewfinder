@@ -98,4 +98,39 @@ describe('App Component', () => {
 		expect(warning2).toBeInTheDocument()
 	})
 
+	it('Should allow a user to view details of a brewery', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		expect(detailsButton[0]).toBeInTheDocument()
+		fireEvent.click(detailsButton[0])
+		// doing getAllByRole here because the Brewery component is visible in the background of the BreweryDetails modal
+		const name = screen.getAllByRole('heading', { name: /casey and khalid\'s backup plan/i })
+		const address = screen.getByText(/123 turing ave/i)
+		const phone = screen.getByText(/555-555-5555/i)
+		expect(name[0]).toBeInTheDocument()
+		expect(address).toBeInTheDocument()
+		expect(phone).toBeInTheDocument()
+	})
+
+	it('Should allow users to view the breweries website', () => {
+		// need to research how to test that an outside link is fired
+	})
+
+	it('Should allow users to close the details view and keep browsing', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		expect(detailsButton[0]).toBeInTheDocument()
+		fireEvent.click(detailsButton[0])
+		const closeButton = screen.getByRole('button', { name: /close/i })
+		expect(closeButton).toBeInTheDocument()
+		fireEvent.click(closeButton)
+		expect(closeButton).not.toBeInTheDocument()
+	})
+
+	it('Should allow users to view the breweries website', () => {
+
+	})
+
 })
