@@ -1,1 +1,39 @@
 @import '../styles/_variables.scss';
+
+.Filter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px 75px 0 75px;
+}
+
+.Filter p {
+	margin-right: 30px;
+	text-align: start;
+}
+
+.bar-sign {
+	height: 5vh;
+	margin-right: 10px;
+}
+
+.Filter button {
+	@include textFont(16px);
+	color: $golden;
+	background: $grey;
+	border-radius: 10px;
+	height: 30px;
+	outline: none;
+	border: none;
+	padding: 0 15px 0 15px;
+	margin: 5px;
+
+	&:hover {
+		filter: drop-shadow(4px 8px 8px $grey);
+	}
+
+	&:focus {
+		color: $grey;
+		background: $golden;
+	}
+}
