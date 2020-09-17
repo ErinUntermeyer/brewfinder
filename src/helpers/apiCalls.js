@@ -13,3 +13,17 @@ export const get20BreweriesByPage = pageNumber => {
 			}
 		})
 }
+
+export const getBreweriesByType = (type, pageNumber) => {
+	return fetch(`${baseUrl}&per_page=20&page=${pageNumber}&by_type=${type}`)
+		.then(response => {
+			if (response.ok) {
+				return response.json()
+					.then(data => {
+						return data
+					})
+			} else {
+				throw response
+			}
+		})
+}
