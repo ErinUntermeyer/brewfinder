@@ -20,3 +20,15 @@ $bone: #E5DCC5;
 	font-family: 'Merriweather', serif;
 	font-size: $fontSize;
 }
+
+@mixin errorMessage {
+	color: $grey;
+	margin: 100px 75px 0 75px;
+	font-size: 42px;
+}
+
+@mixin cardContainer {
+	margin: 75px 150px 0 150px;
+	display: grid;
+	align-items: center;
+}

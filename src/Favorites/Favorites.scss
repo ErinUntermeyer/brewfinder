@@ -1,9 +1,7 @@
 @import '../styles/_variables.scss';
 
 .Favorites {
-	margin: 75px 150px 0 150px;
-	display: grid;
-	align-items: center;
+	@include cardContainer();
 	grid-gap: 10px;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(3, 1fr);
@@ -71,7 +69,5 @@
 }
 
 .no-favorites-msg {
-	color: $grey;
-	margin: 100px 75px 0 75px;
-	font-size: 42px;
+	@include errorMessage();
 }
