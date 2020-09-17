@@ -45,7 +45,7 @@ describe('App Component', () => {
 	})
 
 	it('Should render a header upon load', () => {
-		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		render(<MemoryRouter><App /></MemoryRouter>)
 		const title = screen.getByRole('heading', { name: /brewfinder/i })
 		const tagline = screen.getByRole('heading', { name: /experience colorado one hops at a time/i })
@@ -65,7 +65,7 @@ describe('App Component', () => {
 	})
 
 	it('Should display error if fetch is not successful', async () => {
-		get20BreweriesByPage.mockRejectedValue(404)
+		get20BreweriesByPage.mockRejectedValueOnce(404)
 		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
 		const error = await findByText(/i\'m sorry, we could not retrieve any breweries at this time. please try again later!/i)
 		expect(error).toBeInTheDocument()
@@ -73,6 +73,7 @@ describe('App Component', () => {
 
 	it.skip('Should allow a user to view previous/next 20 breweries', async () => {
 		//researching aftereach cleanup
+		// jest.clearAllMocks()
 		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
 		render(<MemoryRouter><App /></MemoryRouter>)
 		const forwardButton = screen.getByRole('button', { name: /next 20/i })
@@ -96,6 +97,52 @@ describe('App Component', () => {
 		fireEvent.click(forwardButton)
 		const warning2 = await findByText(/you\'re on the last page!/i)
 		expect(warning2).toBeInTheDocument()
+	})
+
+	it('Should allow a user to view details of a brewery', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		expect(detailsButton[0]).toBeInTheDocument()
+		fireEvent.click(detailsButton[0])
+		// doing getAllByRole here because the Brewery component is visible in the background of the BreweryDetails modal
+		const name = screen.getAllByRole('heading', { name: /casey and khalid\'s backup plan/i })
+		const address = screen.getByText(/123 turing ave/i)
+		const phone = screen.getByText(/555-555-5555/i)
+		expect(name[0]).toBeInTheDocument()
+		expect(address).toBeInTheDocument()
+		expect(phone).toBeInTheDocument()
+	})
+
+	it('Should allow a user to view the breweries website', () => {
+		// need to research how to test that an outside link is fired
+	})
+
+	it('Should allow a user to close the details view and keep browsing', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		expect(detailsButton[0]).toBeInTheDocument()
+		fireEvent.click(detailsButton[0])
+		const closeButton = screen.getByRole('button', { name: /close/i })
+		expect(closeButton).toBeInTheDocument()
+		fireEvent.click(closeButton)
+		expect(closeButton).not.toBeInTheDocument()
+	})
+
+	it('Should allow a user to favorite/unfavorite a brewery', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole, findByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		expect(detailsButton[0]).toBeInTheDocument()
+		fireEvent.click(detailsButton[0])
+		const favoriteButton = screen.getByRole('button', { name: /add to favorites/i })
+		expect(favoriteButton).toBeInTheDocument()
+		fireEvent.click(favoriteButton)
+		const unfavoriteButton = await findByRole('button', { name: /unfavorite/i })
+		expect(unfavoriteButton).toBeInTheDocument()
+		fireEvent.click(unfavoriteButton)
+		expect(await findByRole('button', { name: /add to favorites/i })).toBeInTheDocument()
 	})
 
 })

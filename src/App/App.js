@@ -11,6 +11,7 @@ class App extends Component {
 		this.state = {
 			breweries: [],
 			pageNumber: 1,
+			favorites: [],
 			warning: '',
 			error: ''
 		}
@@ -48,6 +49,16 @@ class App extends Component {
 		}
 	}
 
+	addFavorite = brewery => {
+		if (!this.state.favorites.includes(brewery)) {
+			this.setState({ favorites: [...this.state.favorites, brewery] })
+		}
+	}
+
+	removeFavorite = brewery => {
+		this.setState({ favorites: this.state.favorites.filter(favorite => favorite !== brewery) })
+	}
+
 	displayWarning = message => {
 		this.setState({ warning: message })
 		setTimeout(() => {
@@ -65,6 +76,9 @@ class App extends Component {
 						<Breweries
 							breweries={this.state.breweries}
 							changePage={this.changePage}
+							favorites={this.state.favorites}
+							addFavorite={this.addFavorite}
+							removeFavorite={this.removeFavorite}
 						/>
 					)}
 				/>
