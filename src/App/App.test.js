@@ -166,4 +166,21 @@ describe('App Component', () => {
 		expect(phone).toBeInTheDocument()
 	})
 
+	it('Should allow a user to unfavorite from favorites page', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		fireEvent.click(detailsButton[0])
+		const favoriteButton = screen.getByRole('button', { name: /add to favorites/i })
+		fireEvent.click(favoriteButton)
+		const closeButton = screen.getByRole('button', { name: /close/i })
+		fireEvent.click(closeButton)
+		const favorites = screen.getByRole('link', { name: /favorites/i })
+		fireEvent.click(favorites)
+		const unfavoriteButton = screen.getByRole('button', { name: /unfavorite/i })
+		fireEvent.click(unfavoriteButton)
+		const name = screen.queryByRole('heading', { name: /casey and khalid\'s backup plan/i })
+		expect(name).not.toBeInTheDocument()
+	})
+
 })
