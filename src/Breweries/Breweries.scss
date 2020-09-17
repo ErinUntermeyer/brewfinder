@@ -1,9 +1,7 @@
 @import '../styles/_variables.scss';
 
 .Breweries {
-	margin: 75px 150px 0 150px;
-	display: grid;
-	align-items: center;
+	@include cardContainer();
 	grid-gap: 20px;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(5, 1fr);

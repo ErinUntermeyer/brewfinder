@@ -29,7 +29,7 @@ describe('App Component', () => {
 			{
 				"id": 4321,
 				"name": "Diners, Drive-ins and Devs",
-				"brewery_type": "brewpup",
+				"brewery_type": "brewpub",
 				"street": "555 Fuhgetaboutit",
 				"city": "Denver",
 				"state": "Colorado",
@@ -143,6 +143,44 @@ describe('App Component', () => {
 		expect(unfavoriteButton).toBeInTheDocument()
 		fireEvent.click(unfavoriteButton)
 		expect(await findByRole('button', { name: /add to favorites/i })).toBeInTheDocument()
+	})
+
+	it('Should allow a user to view their favorites', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		expect(detailsButton[0]).toBeInTheDocument()
+		fireEvent.click(detailsButton[0])
+		const favoriteButton = screen.getByRole('button', { name: /add to favorites/i })
+		expect(favoriteButton).toBeInTheDocument()
+		fireEvent.click(favoriteButton)
+		const closeButton = screen.getByRole('button', { name: /close/i })
+		fireEvent.click(closeButton)
+		const favorites = screen.getByRole('link', { name: /favorites/i })
+		fireEvent.click(favorites)
+		const name = screen.getByRole('heading', { name: /casey and khalid\'s backup plan/i })
+		const address = screen.getByText(/123 turing ave/i)
+		const phone = screen.getByText(/555-555-5555/i)
+		expect(name).toBeInTheDocument()
+		expect(address).toBeInTheDocument()
+		expect(phone).toBeInTheDocument()
+	})
+
+	it('Should allow a user to unfavorite from favorites page', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findAllByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const detailsButton = await findAllByRole('button', { name: /details/i })
+		fireEvent.click(detailsButton[0])
+		const favoriteButton = screen.getByRole('button', { name: /add to favorites/i })
+		fireEvent.click(favoriteButton)
+		const closeButton = screen.getByRole('button', { name: /close/i })
+		fireEvent.click(closeButton)
+		const favorites = screen.getByRole('link', { name: /favorites/i })
+		fireEvent.click(favorites)
+		const unfavoriteButton = screen.getByRole('button', { name: /unfavorite/i })
+		fireEvent.click(unfavoriteButton)
+		const name = screen.queryByRole('heading', { name: /casey and khalid\'s backup plan/i })
+		expect(name).not.toBeInTheDocument()
 	})
 
 })
