@@ -35,7 +35,7 @@ Header h2 {
 
 .cheers {
 	height: 4vh;
-	margin: 0 10px -10px 0;
+	margin: 0 10px -6px 0;
 }
 
 nav {
@@ -43,7 +43,7 @@ nav {
 	align-items: flex-end;
 }
 
-a {
+Header a {
 	@include textFont(26px);
 	text-decoration: none;
 	color: $golden;

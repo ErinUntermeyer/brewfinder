@@ -1,1 +1,71 @@
 @import '../styles/_variables.scss';
+
+.Favorites {
+	margin: 75px 150px 0 150px;
+	display: grid;
+	align-items: center;
+	grid-gap: 10px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+}
+
+.favorites-box {
+	background-color: $grey;
+	height: 30vh;
+	width: 100%;
+	padding: 20px;
+	overflow: scroll;
+}
+
+.Favorites h1 {
+	font-size: 20px;
+	color: $orangeRed;
+}
+
+.Favorites h2 {
+	font-size: 18px;
+	color: $bone;
+	margin-top: 20px;
+}
+
+.Favorites h3 {
+	font-size: 14px;
+	color: $bone;
+}
+
+.Favorites p {
+	margin: 18px;
+	color: $bone;
+	font-weight: bold;
+}
+
+.buttons-box {
+	display: flex;
+	justify-content: center;
+	color: $golden;
+}
+
+.Favorites a {
+	text-decoration: none;
+	color: $golden;
+	font-size: 20px;
+	margin-right: 15px;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 3px $golden);
+	}
+}
+
+.Favorites button {
+	@include textFont(20px);
+	color: $golden;
+	outline: none;
+	border: none;
+	background: transparent;
+	margin-left: 15px;
+	padding: 0;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 3px $golden);
+	}
+}
