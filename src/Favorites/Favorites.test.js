@@ -81,4 +81,17 @@ describe('Favorites Component', () => {
 
 	})
 
+	it('Should display message if there are no favorites', () => {
+		render(
+			<MemoryRouter>
+				<Favorites
+					favorites={[]}
+					removeFavorite={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const noFavoritesMsg = screen.getByText(/you have no favorites, go add some!/i)
+		expect(noFavoritesMsg).toBeInTheDocument()
+	})
+
 })
