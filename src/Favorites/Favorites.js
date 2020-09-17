@@ -29,9 +29,14 @@ const Favorites = ({ favorites, removeFavorite }) => {
 	})
 
 	return (
-		<section className="Favorites">
-			{favoritesList}
-		</section>
+		<div>
+			{favorites.length === 0 ?
+			<h1 className="no-favorites-msg">You have no favorites, go add some!</h1> :
+			<section className="Favorites">
+				{favoritesList}
+			</section>
+			}
+		</div>
 	)
 }
 
