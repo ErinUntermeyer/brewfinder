@@ -44,5 +44,25 @@ describe('BreweryDetails Component', () => {
 		expect(address).toBeInTheDocument()
 		expect(phone).toBeInTheDocument()
 	})
+
+	it('Should display three links', () => {
+		render(
+			<MemoryRouter>
+				<BreweryDetails
+					show={true}
+					handleClose={jest.fn()}
+					brewery={brewery}
+					favorites={[]}
+					addFavorite={jest.fn()}
+					removeFavorite={jest.fn()}
+				/>
+			</MemoryRouter>)
+			const websiteLink = screen.getByRole('link', { name: /view website/i})
+			const favoriteButton = screen.getByRole('button', { name: /add to favorites/i})
+			const closeButton = screen.getByRole('button', { name: /close/i})
+			expect(websiteLink).toBeInTheDocument()
+			expect(favoriteButton).toBeInTheDocument()
+			expect(closeButton).toBeInTheDocument()
+	})
 	
 })
