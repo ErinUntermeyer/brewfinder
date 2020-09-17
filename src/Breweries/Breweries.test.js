@@ -27,7 +27,7 @@ describe('Breweries Component', () => {
 			{
 				"id": 4321,
 				"name": "Diners, Drive-ins and Devs",
-				"brewery_type": "brewpup",
+				"brewery_type": "brewpub",
 				"street": "555 Fuhgetaboutit",
 				"city": "Denver",
 				"state": "Colorado",
