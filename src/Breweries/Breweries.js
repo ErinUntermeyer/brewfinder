@@ -22,8 +22,8 @@ class Breweries extends Component {
 	}
 
 	makeBreweryList = () => {
-		// return this.props.breweries.map(brewery => {
-		return breweries.map(brewery => {
+		return this.props.breweries.map(brewery => {
+		// return breweries.map(brewery => {
 			return (
 				<article className="brewery-box" key={brewery.id}>
 					<h3>{brewery.name}</h3>
@@ -57,12 +57,14 @@ class Breweries extends Component {
 					onClick={(e) => this.props.changePage('forward')}>
 					Next 20
 				</button>
-				{ this.state.brewery ? (
+				{ this.state.brewery && this.state.showDetails ? (
 				<BreweryDetails
 					show={this.state.showDetails}
 					handleClose={this.hideDetails}
 					brewery={this.state.brewery}
+					favorites={this.props.favorites}
 					addFavorite={this.props.addFavorite}
+					removeFavorite={this.props.removeFavorite}
 				/> ) : null }
 			</div>
 		)
