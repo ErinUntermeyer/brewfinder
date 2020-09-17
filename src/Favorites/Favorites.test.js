@@ -65,4 +65,20 @@ describe('Favorites Component', () => {
 		expect(phone2).toBeInTheDocument()
 	})
 
+	it('Should fire the correct method when unfavorite clicked', () => {
+		const removeFavorite = jest.fn()
+		render(
+			<MemoryRouter>
+				<Favorites
+					favorites={favorites}
+					removeFavorite={removeFavorite}
+				/>
+			</MemoryRouter>
+		)
+		const unfavoriteButton = screen.getAllByRole('button', { name: /unfavorite/i })
+		fireEvent.click(unfavoriteButton[0])
+		expect(removeFavorite).toBeCalledTimes(1)
+
+	})
+
 })
