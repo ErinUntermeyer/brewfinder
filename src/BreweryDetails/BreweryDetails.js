@@ -2,7 +2,7 @@ import React from 'react'
 import cheers from '../assets/cheers.png'
 import './BreweryDetails.scss'
 
-const BreweryDetails = ({ show, handleClose, brewery }) => {
+const BreweryDetails = ({ show, handleClose, brewery, addFavorite }) => {
 	const toggleClassName = show ? "modal display-block" : "modal display-none"
 
 	return (
@@ -19,7 +19,10 @@ const BreweryDetails = ({ show, handleClose, brewery }) => {
 						rel="noopener noreferrer">
 						view website
         	</a>
-					<button><img src={cheers} alt="Two glasses clinking together" className="cheers-details" />add to favorites</button>
+					<button onClick={(e) => addFavorite(brewery)}>
+						<img src={cheers} alt="Two glasses clinking together" className="cheers-details" />
+						add to favorites
+					</button>
 					<button onClick={(e) => handleClose()}>close</button>
 				</div>
 			</article>
