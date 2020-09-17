@@ -750,3 +750,111 @@ export const breweries = [
 		"updated_at": "2018-08-24T00:05:13.974Z"
 	}
 ]
+
+export const favorites = [
+	{
+		"id": 1580,
+		"name": "The Grateful Gnome Sandwich Shoppe and Brewery",
+		"brewery_type": "brewpub",
+		"street": "4369 Stuart St",
+		"city": "Denver",
+		"state": "Colorado",
+		"postal_code": "80212-2335",
+		"country": "United States",
+		"longitude": "-105.0432655",
+		"latitude": "39.7764426",
+		"phone": "7205986863",
+		"website_url": "http://www.thegratefulgnome.com",
+		"updated_at": "2018-08-24T00:24:51.406Z"
+	},
+	{
+		"id": 1195,
+		"name": "3 Freaks Brewing Co",
+		"brewery_type": "micro",
+		"street": "7140 E County Line Rd",
+		"city": "Highlands Ranch",
+		"state": "Colorado",
+		"postal_code": "80126-3926",
+		"country": "United States",
+		"longitude": "-104.9426656",
+		"latitude": "39.5659575",
+		"phone": "7202990994",
+		"website_url": "http://www.3freaksbrewery.com",
+		"updated_at": "2018-08-24T00:05:14.991Z"
+	},
+	{
+		"id": 1222,
+		"name": "Barrels & Bottles Brewery",
+		"brewery_type": "brewpub",
+		"street": "600 12th St Ste 160",
+		"city": "Golden",
+		"state": "Colorado",
+		"postal_code": "80401-6145",
+		"country": "United States",
+		"longitude": "-105.2202098",
+		"latitude": "39.7562107",
+		"phone": "7203283643",
+		"website_url": "http://www.barrelsbottles.com",
+		"updated_at": "2018-08-24T00:05:36.634Z"
+	},
+	{
+		"id": 1227,
+		"name": "BierWerks",
+		"brewery_type": "brewpub",
+		"street": "121 E. Midland Ave",
+		"city": "Woodland Park",
+		"state": "Colorado",
+		"postal_code": "80863",
+		"country": "United States",
+		"longitude": "-105.0519462",
+		"latitude": "38.9941414",
+		"phone": "7196868100",
+		"website_url": "http://www.bierwerks.com",
+		"updated_at": "2018-08-24T00:05:41.424Z"
+	},
+	{
+		"id": 1229,
+		"name": "Big Choice Brewing Co",
+		"brewery_type": "micro",
+		"street": "21 S 1st Ave",
+		"city": "Brighton",
+		"state": "Colorado",
+		"postal_code": "80601-1603",
+		"country": "United States",
+		"longitude": "-104.822433",
+		"latitude": "39.9864294285714",
+		"phone": "3034692616",
+		"website_url": "http://www.bigchoicebrewing.com",
+		"updated_at": "2018-08-24T00:05:43.462Z"
+	},
+	{
+		"id": 1333,
+		"name": "Dodgeton Creek Brewing Co.",
+		"brewery_type": "planning",
+		"street": "",
+		"city": "Trinidad",
+		"state": "Colorado",
+		"postal_code": "81082-9788",
+		"country": "United States",
+		"longitude": "-104.5005411",
+		"latitude": "37.169397",
+		"phone": "7198462339",
+		"website_url": "http://www.dodgetoncreek.com",
+		"updated_at": "2018-08-24T00:06:57.576Z"
+	},
+	{
+		"id": 1250,
+		"name": "Brass Brewing Company",
+		"brewery_type": "micro",
+		"street": "318 E Colorado Ave",
+		"city": "Colorado Springs",
+		"state": "Colorado",
+		"postal_code": "80903-1949",
+		"country": "United States",
+		"longitude": "-104.818970612347",
+		"latitude": "38.8326073",
+		"phone": "",
+		"website_url": "",
+		"updated_at": "2018-08-24T00:22:11.364Z"
+	}
+]

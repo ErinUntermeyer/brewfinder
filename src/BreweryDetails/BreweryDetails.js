@@ -3,6 +3,7 @@ import cheers from '../assets/cheers.png'
 import './BreweryDetails.scss'
 
 const BreweryDetails = ({ show, handleClose, brewery, favorites, addFavorite, removeFavorite }) => {
+	
 	const toggleClassName = show ? "modal display-block" : "modal display-none"
 	
 	const determineFavorite = () => {
