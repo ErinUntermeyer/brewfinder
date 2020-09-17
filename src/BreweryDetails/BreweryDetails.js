@@ -2,8 +2,28 @@ import React from 'react'
 import cheers from '../assets/cheers.png'
 import './BreweryDetails.scss'
 
-const BreweryDetails = ({ show, handleClose, brewery, addFavorite }) => {
+const BreweryDetails = ({ show, handleClose, brewery, favorites, addFavorite, removeFavorite }) => {
 	const toggleClassName = show ? "modal display-block" : "modal display-none"
+
+	const determineFavorite = () => {
+		console.log(favorites)
+		console.log(brewery)
+		if (favorites === undefined || !favorites.includes(brewery)) {
+			return (
+				<button onClick={(e) => addFavorite(brewery)}>
+					<img src={cheers} alt="Two glasses clinking together" className="cheers-details" />
+						add to favorites
+				</button>
+			)
+		} else {
+			return (
+				<button onClick={(e) => removeFavorite(brewery)}>
+					<img src={cheers} alt="Two glasses clinking together" className="cheers-details" />
+						unfavorite
+				</button>
+			)
+		}
+	}
 
 	return (
 		<div className={toggleClassName}>
@@ -19,10 +39,7 @@ const BreweryDetails = ({ show, handleClose, brewery, addFavorite }) => {
 						rel="noopener noreferrer">
 						view website
         	</a>
-					<button onClick={(e) => addFavorite(brewery)}>
-						<img src={cheers} alt="Two glasses clinking together" className="cheers-details" />
-						add to favorites
-					</button>
+					{determineFavorite()}
 					<button onClick={(e) => handleClose()}>close</button>
 				</div>
 			</article>
