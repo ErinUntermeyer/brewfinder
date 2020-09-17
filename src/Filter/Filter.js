@@ -31,8 +31,8 @@ const Filter = ({ setStateByType, type }) => {
 				<button onClick={(e) => setStateByType("all")}>
 					all
 				</button>
+				<p className="current-filter">current filter: {type}</p>
 			</div>
-			{ type ? <p>current filter: {type}</p> : null }
 		</section>
 	)
 }
