@@ -17,15 +17,15 @@ class App extends Component {
 		}
 	}
 
-	// componentDidMount() {
-	// 	this.getBreweries()
-	// }
+	componentDidMount() {
+		this.getBreweries()
+	}
 
-	// componentDidUpdate(prevProps, prevState) {
-	// 	if (this.state.pageNumber !== prevState.pageNumber) {
-	// 		this.getBreweries()
-	// 	}
-	// }
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.pageNumber !== prevState.pageNumber) {
+			this.getBreweries()
+		}
+	}
 
 	getBreweries = () => {
 		get20BreweriesByPage(this.state.pageNumber)
@@ -55,6 +55,10 @@ class App extends Component {
 		}
 	}
 
+	removeFavorite = brewery => {
+		this.setState({ favorites: this.state.favorites.filter(favorite => favorite !== brewery) })
+	}
+
 	displayWarning = message => {
 		this.setState({ warning: message })
 		setTimeout(() => {
@@ -72,7 +76,9 @@ class App extends Component {
 						<Breweries
 							breweries={this.state.breweries}
 							changePage={this.changePage}
+							favorites={this.state.favorites}
 							addFavorite={this.addFavorite}
+							removeFavorite={this.removeFavorite}
 						/>
 					)}
 				/>
