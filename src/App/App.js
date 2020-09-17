@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { get20BreweriesByPage } from '../helpers/apiCalls'
 import Header from '../Header/Header'
 import Breweries from '../Breweries/Breweries'
+import Favorites from '../Favorites/Favorites'
 import './App.scss'
 
 class App extends Component {
@@ -73,17 +74,22 @@ class App extends Component {
 			<main>
 				{ this.state.error ? <h1 className="error">{this.state.error}</h1> : (
 				<Route exact path="/" render={() => (
-						<Breweries
-							breweries={this.state.breweries}
-							changePage={this.changePage}
-							favorites={this.state.favorites}
-							addFavorite={this.addFavorite}
-							removeFavorite={this.removeFavorite}
-						/>
-					)}
-				/>
+					<Breweries
+						breweries={this.state.breweries}
+						changePage={this.changePage}
+						favorites={this.state.favorites}
+						addFavorite={this.addFavorite}
+						removeFavorite={this.removeFavorite}
+					/>
+				)} />
 				) }
 				{ this.state.warning ? <p>{this.state.warning}</p> : null }
+				<Route exact path ="/favorites" render={() => (
+					<Favorites
+						favorites={this.state.favorites}
+						removeFavorite={this.removeFavorite}
+					/>
+				)} />
 			</main>
 		</div>
 		)
