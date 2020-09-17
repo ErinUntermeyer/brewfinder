@@ -64,5 +64,29 @@ describe('BreweryDetails Component', () => {
 			expect(favoriteButton).toBeInTheDocument()
 			expect(closeButton).toBeInTheDocument()
 	})
+
+	it('Should fire the correct method when close button clicked', () => {
+		const handleClose = jest.fn()
+		render(
+			<MemoryRouter>
+				<BreweryDetails
+					show={true}
+					handleClose={handleClose}
+					brewery={brewery}
+					favorites={[]}
+					addFavorite={jest.fn()}
+					removeFavorite={jest.fn()}
+				/>
+			</MemoryRouter>)
+		const closeButton = screen.getByRole('button', { name: /close/i })
+		expect(closeButton).toBeInTheDocument()
+		fireEvent.click(closeButton)
+		expect(handleClose).toBeCalledTimes(1)
+	})
+
+	it('Should fire the correct method when favorite/unfavorite clicked', () => {
+		// need to get the bug out when next page clicked before testing
+		// may need to move things around
+	})
 	
 })
