@@ -18,7 +18,12 @@ const About = () => {
 					<img src={orangeRedBeer} alt="Beer mug" className="about-logo" />
 					<h1>definitions</h1>
 				</div>
-				definitions go here
+				<p><span className="title-word">micro:</span> brewery that produces less than 15,000 barrels of beer annually.<br></br></p>
+				<p><span className="title-word">brewpub:</span> combination of a brewery and a restaurant. Most, if not all, of the brewing is done on site and if their beer sales grow to exceed 50% of total sales, they are bumped into the microbrewery category.<br></br></p>
+				<p><span className="title-word">regional:</span> brewery that produces between 15,000 and 6,000,000 barrels of beer annually.<br></br></p>
+				<p><span className="title-word">large:</span> once a brewery sells more than 500,000 barrels of beer, they earn their title as "large" brewery.<br></br></p>
+				<p><span className="title-word">contract:</span> a business that hires another brewery to produce it's beer.  The contract brewing company handles all marketing, sales and distribution while the brewery does the brewing and packaging.<br></br></p>
+				<p><span className="title-word">proprietor:</span> a proprietor, typically called an alternating proprietor, is a licensed tenant brewery that takes possession of a shared brewery while also brewing.<br></br></p>
 			</article>
 			<article className="related-links">
 				<div className="about-title-box">
