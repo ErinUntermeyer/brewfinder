@@ -33,4 +33,20 @@ describe('Filter Component', () => {
 		expect(all).toBeInTheDocument()
 	})
 
+	it('Should fire the correct method when button clicked', () => {
+		const setStateByType = jest.fn()
+		render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={setStateByType}
+					type={'micro'}
+				/>
+			</MemoryRouter>
+		)
+		const micro = screen.getByRole('button', { name: /micro/i })
+		fireEvent.click(micro)
+		expect(setStateByType).toBeCalledTimes(1)
+		expect(setStateByType).toBeCalledWith('micro')
+	})
+
 })
