@@ -15,3 +15,19 @@
 .error {
 	@include errorMessage();
 }
+
+.warning {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 150px;
+	font-size: 16px;
+	color: teal;
+}
+
+.warning-space {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 150px;
+	font-size: 16px;
+	color: $bone;
+}
