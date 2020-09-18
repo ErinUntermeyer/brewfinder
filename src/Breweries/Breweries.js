@@ -64,7 +64,7 @@ class Breweries extends Component {
 					show={this.state.showDetails}
 					handleClose={this.hideDetails}
 					brewery={this.state.brewery}
-					favorites={this.props.favorites}
+					favoriteIds={this.props.favoriteIds}
 					addFavorite={this.props.addFavorite}
 					removeFavorite={this.props.removeFavorite}
 				/> ) : null }

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import cheers from '../assets/cheers.png'
 import './BreweryDetails.scss'
 
-const BreweryDetails = ({ show, handleClose, brewery, favorites, addFavorite, removeFavorite }) => {
+const BreweryDetails = ({ show, handleClose, brewery, favoriteIds, addFavorite, removeFavorite }) => {
 	
 	const toggleClassName = show ? "modal display-block" : "modal display-none"
 
 	const determineFavorite = () => {
-		if (favorites === undefined || !favorites.find(id => id === brewery.id)) {
+		if (favoriteIds === undefined || !favoriteIds.find(id => id === brewery.id)) {
 			return (
 				<button onClick={(e) => addFavorite(brewery)}>
 					<img src={cheers} alt="Two glasses clinking together" className="cheers-details" />
@@ -53,7 +53,7 @@ BreweryDetails.propTypes = {
 	show: PropTypes.bool.isRequired,
 	handleClose: PropTypes.func.isRequired,
 	brewery: PropTypes.object.isRequired,
-	favorites: PropTypes.array.isRequired,
+	favoriteIds: PropTypes.array.isRequired,
 	addFavorite: PropTypes.func.isRequired,
 	removeFavorite: PropTypes.func.isRequired
 }

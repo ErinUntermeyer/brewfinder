@@ -13,7 +13,8 @@ class App extends Component {
 		this.state = {
 			breweries: [],
 			pageNumber: 1,
-			favorites: [],
+			favoriteIds: [],
+			favoriteBreweriesData: [],
 			type: "all",
 			warning: '',
 			error: ''
@@ -77,14 +78,16 @@ class App extends Component {
 		}
 	}
 
-	addFavorite = brewery => {
-		if (!this.state.favorites.find(id => id === brewery.id)) {
-			this.setState({ favorites: [...this.state.favorites, brewery.id] })
+	addFavorite = async brewery => {
+		if (!this.state.favoriteIds.find(id => id === brewery.id)) {
+			this.setState({ favoriteIds: [...this.state.favoriteIds, brewery.id] })
 		}
+		this.setState({ favoriteBreweriesData: [...this.state.favoriteBreweriesData, brewery] })
 	}
 
 	removeFavorite = brewery => {
-		this.setState({ favorites: this.state.favorites.filter(favorite => favorite !== brewery.id) })
+		this.setState({ favoriteIds: this.state.favoriteIds.filter(favorite => favorite !== brewery.id) })
+		this.setState({ favoriteBreweriesData: this.state.favoriteBreweriesData.filter(favorite => favorite !== brewery) })
 	}
 
 	displayWarning = message => {
@@ -109,7 +112,7 @@ class App extends Component {
 						<Breweries
 							breweries={this.state.breweries}
 							changePage={this.changePage}
-							favorites={this.state.favorites}
+							favoriteIds={this.state.favoriteIds}
 							addFavorite={this.addFavorite}
 							removeFavorite={this.removeFavorite}
 						/>
@@ -119,7 +122,7 @@ class App extends Component {
 				{ this.state.warning ? <p>{this.state.warning}</p> : null }
 				<Route exact path ="/favorites" render={() => (
 					<Favorites
-						favorites={this.state.favorites}
+						favoriteBreweriesData={this.state.favoriteBreweriesData}
 						removeFavorite={this.removeFavorite}
 					/>
 				)} />
