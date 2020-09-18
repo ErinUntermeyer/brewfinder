@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cheers from '../assets/cheers.png'
 import './Favorites.scss'
 
-// import { favorites } from '../helpers/data'
+import { favorites } from '../helpers/data'
 
 const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 
@@ -22,10 +22,12 @@ const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 						rel="noopener noreferrer">
 						website
 					</a>
-					<button onClick={(e) => removeFavorite(favorite)}>
+					<div className="unfavorite-box">
 						<img src={cheers} alt="Two glasses clinking together" className="favorite-cheers" />
+						<button onClick={(e) => removeFavorite(favorite)}>
 						unfavorite
-					</button>
+						</button>
+					</div>
 				</div>
 			</article>
 		)
