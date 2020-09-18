@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import cheers from '../assets/cheers.png'
 import './Favorites.scss'
 
@@ -42,3 +43,8 @@ const Favorites = ({ favorites, removeFavorite }) => {
 }
 
 export default Favorites
+
+Favorites.propTypes = {
+	favorites: PropTypes.array.isRequired,
+	removeFavorite: PropTypes.func.isRequired
+}
