@@ -46,7 +46,8 @@
 	left: 47%;
   margin-left: -50px;
   top: 110%;
-  margin-top: -50px;
+	margin-top: -50px;
+	cursor: pointer;
 
 	&:hover {
 		filter: drop-shadow(0px 0px 4px $golden);
@@ -62,4 +63,9 @@
 .back-button, .forward-button {
 	@include greyButton();
 	color: $teal;
+
+	&:active {
+		background: $teal;
+		color: $grey
+	}
 }

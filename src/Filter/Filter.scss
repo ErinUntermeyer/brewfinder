@@ -20,7 +20,7 @@
 .Filter button {
 	@include greyButton();
 
-	&:focus {
+	&:active {
 		color: $grey;
 		background: $golden;
 	}

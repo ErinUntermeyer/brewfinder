@@ -95,7 +95,7 @@ class App extends Component {
 		this.setState({ warning: message })
 		setTimeout(() => {
 			this.setState({ warning: '' })
-		}, 3000)
+		}, 1000)
 	}
 
 	render() {
@@ -110,6 +110,7 @@ class App extends Component {
 							setStateByType={this.setStateByType}
 							type={this.state.type}
 						/>
+								{this.state.warning ? <p className="warning">{this.state.warning}</p> : <p className= "warning-space">.</p>}
 						<Breweries
 							breweries={this.state.breweries}
 							changePage={this.changePage}
@@ -120,7 +121,6 @@ class App extends Component {
 					</>
 				)} />
 				) }
-				{ this.state.warning ? <p>{this.state.warning}</p> : null }
 				<Route exact path ="/favorites" render={() => (
 					<Favorites
 						favoriteBreweriesData={this.state.favoriteBreweriesData}

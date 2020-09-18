@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cheers from '../assets/cheers.png'
 import './Favorites.scss'
 
-// import { favorites } from '../helpers/data'
+import { favorites } from '../helpers/data'
 
 const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 
@@ -11,9 +11,10 @@ const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 		return (
 			<article className="favorites-box" key={favorite.id}>
 				<h1>{favorite.name}</h1>
+				<p className="fav-type">brewery type: {favorite.brewery_type}</p>
 				<h2>{favorite.street}</h2>
 				<h3>{favorite.city}, CO {favorite.postal_code.slice(0, 5)}</h3>
-				<p>{favorite.phone.slice(0, 3)}-{favorite.phone.slice(3, 6)}-{favorite.phone.slice(6, 11)}</p>
+				<p className="fav-phone">{favorite.phone.slice(0, 3)}-{favorite.phone.slice(3, 6)}-{favorite.phone.slice(6, 11)}</p>
 				<div className="buttons-box">
 					<a
 						href={favorite.website_url}
@@ -21,10 +22,12 @@ const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 						rel="noopener noreferrer">
 						website
 					</a>
-					<button onClick={(e) => removeFavorite(favorite)}>
+					<div className="unfavorite-box">
 						<img src={cheers} alt="Two glasses clinking together" className="favorite-cheers" />
+						<button onClick={(e) => removeFavorite(favorite)}>
 						unfavorite
-					</button>
+						</button>
+					</div>
 				</div>
 			</article>
 		)
