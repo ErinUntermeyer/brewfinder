@@ -45,6 +45,6 @@ const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 export default Favorites
 
 Favorites.propTypes = {
-	favoriteBreweriesData: PropTypes.array.isRequired,
+	favoriteBreweriesData: PropTypes.array,
 	removeFavorite: PropTypes.func.isRequired
 }

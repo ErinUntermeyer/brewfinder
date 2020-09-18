@@ -5,10 +5,10 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Favorites Component', () => {
-	let favorites
+	let favoriteBreweriesData
 
 	beforeEach(() => {
-		favorites = [
+		favoriteBreweriesData = [
 			{
 				"id": 420,
 				"name": "Catz Rule",
@@ -46,7 +46,7 @@ describe('Favorites Component', () => {
 		render(
 			<MemoryRouter>
 				<Favorites
-					favorites={favorites}
+					favoriteBreweriesData={favoriteBreweriesData}
 					removeFavorite={jest.fn()}
 				/>
 			</MemoryRouter>
@@ -70,7 +70,7 @@ describe('Favorites Component', () => {
 		render(
 			<MemoryRouter>
 				<Favorites
-					favorites={favorites}
+					favoriteBreweriesData={favoriteBreweriesData}
 					removeFavorite={removeFavorite}
 				/>
 			</MemoryRouter>
@@ -85,12 +85,12 @@ describe('Favorites Component', () => {
 		render(
 			<MemoryRouter>
 				<Favorites
-					favorites={[]}
+					favoriteBreweriesData={[]}
 					removeFavorite={jest.fn()}
 				/>
 			</MemoryRouter>
 		)
-		const noFavoritesMsg = screen.getByText(/you have no favorites, go add some!/i)
+		const noFavoritesMsg = screen.getByText(/currently, you have no favorites. go add some!/i)
 		expect(noFavoritesMsg).toBeInTheDocument()
 	})
 

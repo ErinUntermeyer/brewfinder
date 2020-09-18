@@ -53,7 +53,7 @@ BreweryDetails.propTypes = {
 	show: PropTypes.bool.isRequired,
 	handleClose: PropTypes.func.isRequired,
 	brewery: PropTypes.object.isRequired,
-	favoriteIds: PropTypes.array.isRequired,
+	favoriteIds: PropTypes.array,
 	addFavorite: PropTypes.func.isRequired,
 	removeFavorite: PropTypes.func.isRequired
 }
