@@ -18,19 +18,7 @@
 }
 
 .Filter button {
-	@include textFont(16px);
-	color: $golden;
-	background: $grey;
-	border-radius: 10px;
-	height: 30px;
-	outline: none;
-	border: none;
-	padding: 0 15px 0 15px;
-	margin: 5px;
-
-	&:hover {
-		filter: drop-shadow(4px 8px 8px $grey);
-	}
+	@include greyButton();
 
 	&:focus {
 		color: $grey;
