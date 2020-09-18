@@ -1,1 +1,40 @@
 @import '../styles/_variables.scss';
+
+.About {
+	display: flex;
+	flex-direction: column;
+	margin: 50px 150px 0 150px;
+}
+
+.about-title-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.summary, .definitions, .related-links, .credits {
+	background: $grey;
+	border-radius: 10px;
+	margin: 10px 0 10px 0;
+	padding: 30px;
+	color: $bone;
+}
+
+.About h1 {
+	@include textFont(26px);
+	color: $orangeRed;
+}
+
+.About p {
+	line-height: 30px;
+}
+
+.about-logo {
+	height: 3vh;
+	margin-right: 10px;
+}
+
+.title-word {
+	@include headerFont(32px);
+}
