@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import { get20BreweriesByPage } from '../helpers/apiCalls'
+import { get20BreweriesByPage, getBreweriesByType } from '../helpers/apiCalls'
 import Header from '../Header/Header'
 import Breweries from '../Breweries/Breweries'
+import Filter from '../Filter/Filter'
 import Favorites from '../Favorites/Favorites'
 import './App.scss'
 
@@ -13,6 +14,7 @@ class App extends Component {
 			breweries: [],
 			pageNumber: 1,
 			favorites: [],
+			type: "all",
 			warning: '',
 			error: ''
 		}
@@ -23,8 +25,19 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.pageNumber !== prevState.pageNumber) {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === "all") {
 			this.getBreweries()
+		}
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== "all") {
+			this.filterBreweriesByType(this.state.type)
+		}
+		if (this.state.type !== prevState.type && this.state.type === "all") {
+			this.setState({ pageNumber: 1 })
+			this.getBreweries()
+		}
+		if (this.state.type !== prevState.type) {
+			this.setState({ pageNumber: 1 })
+			this.filterBreweriesByType(this.state.type)
 		}
 	}
 
@@ -36,6 +49,20 @@ class App extends Component {
 			.catch(error => {
 				this.setState({ error: 'I\'m sorry, we could not retrieve any breweries at this time. Please try again later!' })
 			})
+	}
+
+	filterBreweriesByType = type => {
+		getBreweriesByType(type, this.state.pageNumber)
+			.then(data => {
+				this.setState({ breweries: data })
+			})
+			.catch(error => {
+				this.setState({ error: 'I\'m sorry, we could not retrieve any breweries at this time. Please try again later!' })
+			})
+	}
+
+	setStateByType = type => {
+		this.setState({ type: type })
 	}
 
 	changePage = direction => {
@@ -74,13 +101,19 @@ class App extends Component {
 			<main>
 				{ this.state.error ? <h1 className="error">{this.state.error}</h1> : (
 				<Route exact path="/" render={() => (
-					<Breweries
-						breweries={this.state.breweries}
-						changePage={this.changePage}
-						favorites={this.state.favorites}
-						addFavorite={this.addFavorite}
-						removeFavorite={this.removeFavorite}
-					/>
+					<>
+						<Filter 
+							setStateByType={this.setStateByType}
+							type={this.state.type}
+						/>
+						<Breweries
+							breweries={this.state.breweries}
+							changePage={this.changePage}
+							favorites={this.state.favorites}
+							addFavorite={this.addFavorite}
+							removeFavorite={this.removeFavorite}
+						/>
+					</>
 				)} />
 				) }
 				{ this.state.warning ? <p>{this.state.warning}</p> : null }

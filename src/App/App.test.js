@@ -3,11 +3,11 @@ import App from './App'
 import { MemoryRouter } from 'react-router-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { get20BreweriesByPage } from '../helpers/apiCalls'
+import { get20BreweriesByPage, getBreweriesByType } from '../helpers/apiCalls'
 jest.mock('../helpers/apiCalls')
 
 describe('App Component', () => {
-	let mockedBreweries
+	let mockedBreweries, mockedBreweriesByType
 
 	beforeEach(() => {
 		mockedBreweries = [
@@ -40,6 +40,23 @@ describe('App Component', () => {
 				"phone": "5555555555",
 				"website_url": "http://www.devs.com",
 				"updated_at": "always"
+			}
+		]
+		mockedBreweriesByType = [
+			{
+				"id": 1234,
+				"name": "Casey and Khalid's Backup Plan",
+				"brewery_type": "micro",
+				"street": "123 Turing Ave",
+				"city": "Denver",
+				"state": "Colorado",
+				"postal_code": "80203",
+				"country": "United States",
+				"longitude": "-100",
+				"latitude": "40",
+				"phone": "5555555555",
+				"website_url": "http://www.backupplan.com",
+				"updated_at": "now"
 			}
 		]
 	})
@@ -181,6 +198,16 @@ describe('App Component', () => {
 		fireEvent.click(unfavoriteButton)
 		const name = screen.queryByRole('heading', { name: /casey and khalid\'s backup plan/i })
 		expect(name).not.toBeInTheDocument()
+	})
+
+	it('Should fetch breweries by type when filter button clicked', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		getBreweriesByType.mockResolvedValueOnce(mockedBreweriesByType)
+		const { getByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const microButton = screen.getByRole('button', { name: /micro/i })
+		fireEvent.click(microButton)
+		expect(getBreweriesByType).toBeCalledTimes(1)
+
 	})
 
 })

@@ -1,0 +1,31 @@
+@import '../styles/_variables.scss';
+
+.Filter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.Filter p {
+	margin-right: 30px;
+	text-align: start;
+}
+
+.bar-sign {
+	height: 5vh;
+	margin-right: 10px;
+}
+
+.Filter button {
+	@include greyButton();
+
+	&:focus {
+		color: $grey;
+		background: $golden;
+	}
+}
+
+.current-filter {
+	margin: 10px 0 0 70px;
+}
