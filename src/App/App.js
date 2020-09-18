@@ -20,26 +20,26 @@ class App extends Component {
 		}
 	}
 
-	componentDidMount() {
-		this.getBreweries()
-	}
+	// componentDidMount() {
+	// 	this.getBreweries()
+	// }
 
-	componentDidUpdate(prevProps, prevState) {
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === "all") {
-			this.getBreweries()
-		}
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== "all") {
-			this.filterBreweriesByType(this.state.type)
-		}
-		if (this.state.type !== prevState.type && this.state.type === "all") {
-			this.setState({ pageNumber: 1 })
-			this.getBreweries()
-		}
-		if (this.state.type !== prevState.type) {
-			this.setState({ pageNumber: 1 })
-			this.filterBreweriesByType(this.state.type)
-		}
-	}
+	// componentDidUpdate(prevProps, prevState) {
+	// 	if (this.state.pageNumber !== prevState.pageNumber && this.state.type === "all") {
+	// 		this.getBreweries()
+	// 	}
+	// 	if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== "all") {
+	// 		this.filterBreweriesByType(this.state.type)
+	// 	}
+	// 	if (this.state.type !== prevState.type && this.state.type === "all") {
+	// 		this.setState({ pageNumber: 1 })
+	// 		this.getBreweries()
+	// 	}
+	// 	if (this.state.type !== prevState.type) {
+	// 		this.setState({ pageNumber: 1 })
+	// 		this.filterBreweriesByType(this.state.type)
+	// 	}
+	// }
 
 	getBreweries = () => {
 		get20BreweriesByPage(this.state.pageNumber)

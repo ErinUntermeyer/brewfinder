@@ -3,29 +3,55 @@
 .Breweries {
 	@include cardContainer();
 	margin-top: 30px;
-	grid-gap: 20px;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(5, 1fr);
+}
+
+.brewery-box {
 	background: $grey;
+	border-radius: 10px;
+	align-items: center;
+	overflow: scroll;
+	height: inherit;
+	height: 15vh;
+	width: 100%;
+	padding: 10px;
+	position: relative;
 }
 
 .Breweries h3 {
-	color: $orangeRed;
+	color: $teal;
 	font-size: 22px;
-	text-align: start;
+	// text-align: start;
 }
 
 .Breweries p {
 	color: $bone;
 	font-size: 16px;
-	text-align: end;
-	margin-left: 20px;
+	margin: 10px 0 10px 0;
+	// text-align: end;
+	// margin-left: 20px;
 }
 
-.brewery-box {
-	align-items: center;
-	overflow: scroll;
-	height: inherit;
+.details-button {
+	@include textFont(16px);
+	font-weight: bold;
+	color: $grey;
+	background: $golden;
+	border-radius: 8px;
+	height: 25px;
+	outline: none;
+	border: none;
+	padding: 0 15px 0 15px;
+	position: absolute;
+	left: 47%;
+  margin-left: -50px;
+  top: 110%;
+  margin-top: -50px;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 4px $golden);
+	}
 }
 
 .back-button, .forward-button {

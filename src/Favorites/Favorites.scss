@@ -2,12 +2,14 @@
 
 .Favorites {
 	@include cardContainer();
-	grid-gap: 10px;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(3, 1fr);
 }
 
 .favorites-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	background-color: $grey;
 	height: 30vh;
 	width: 100%;
