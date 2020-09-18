@@ -203,11 +203,25 @@ describe('App Component', () => {
 	it('Should fetch breweries by type when filter button clicked', async () => {
 		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		getBreweriesByType.mockResolvedValueOnce(mockedBreweriesByType)
-		const { getByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		render(<MemoryRouter><App /></MemoryRouter>)
 		const microButton = screen.getByRole('button', { name: /micro/i })
 		fireEvent.click(microButton)
 		expect(getBreweriesByType).toBeCalledTimes(1)
+	})
 
+	it('Should allow a user to view the about page', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const aboutButton = await findByRole('link', { name: /about/i })
+		fireEvent.click(aboutButton)
+		const summary = screen.getByRole('heading', { name: /summary/i })
+		const definitions = screen.getByRole('heading', { name: /definitions/i })
+		const relatedLinks = screen.getByRole('heading', { name: /related links/i })
+		const credits = screen.getByRole('heading', { name: /credits/i })
+		expect(summary).toBeInTheDocument()
+		expect(definitions).toBeInTheDocument()
+		expect(relatedLinks).toBeInTheDocument()
+		expect(credits).toBeInTheDocument()
 	})
 
 })
