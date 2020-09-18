@@ -5,6 +5,7 @@ import Header from '../Header/Header'
 import Breweries from '../Breweries/Breweries'
 import Filter from '../Filter/Filter'
 import Favorites from '../Favorites/Favorites'
+import About from '../About/About'
 import './App.scss'
 
 class App extends Component {
@@ -122,6 +123,9 @@ class App extends Component {
 						favorites={this.state.favorites}
 						removeFavorite={this.removeFavorite}
 					/>
+				)} />
+				<Route exact path ="/about" render={() => (
+					<About />
 				)} />
 			</main>
 		</div>
