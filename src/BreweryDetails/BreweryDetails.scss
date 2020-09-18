@@ -12,7 +12,7 @@
 .Brewery-details {
   position: fixed;
 	background: $teal;
-	border-radius: 35px;
+	border-radius: 15px;
   width: 60%;
   height: 40%;
   top:50%;
@@ -64,7 +64,7 @@
 	@include textFont(20px);
 	color: $golden;
 	background: $grey;
-	border-radius: 15px;
+	border-radius: 10px;
 	align-self: center;
 	height: 40px;
 	outline: none;
@@ -80,7 +80,7 @@
 	@include textFont(20px);
 	color: $golden;
 	background: $grey;
-	border-radius: 15px;
+	border-radius: 10px;
 	align-self: center;
 	height: 40px;
 	outline: none;

@@ -1,9 +1,10 @@
 import React from 'react'
+import cheers from '../assets/cheers.png'
 import './Favorites.scss'
 
-// import { favorites } from '../helpers/data'
+import { favorites } from '../helpers/data'
 
-const Favorites = ({ favorites, removeFavorite }) => {
+const Favorites = ({ /* favorites, */ removeFavorite }) => {
 
 	const favoritesList = favorites.map(favorite => {
 		return (
@@ -19,9 +20,9 @@ const Favorites = ({ favorites, removeFavorite }) => {
 						rel="noopener noreferrer">
 						website
 					</a>
-					||
 					<button onClick={(e) => removeFavorite(favorite)}>
-							unfavorite
+						<img src={cheers} alt="Two glasses clinking together" className="favorite-cheers" />
+						unfavorite
 					</button>
 				</div>
 			</article>

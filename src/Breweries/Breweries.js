@@ -43,10 +43,8 @@ class Breweries extends Component {
 
 	render() {
 		return (
-			<div>
-				<section className="Breweries">
-					{this.makeBreweryList()}
-				</section>
+			<>
+			<div className="page-button-box">
 				<button
 					className="back-button"
 					onClick={(e) => this.props.changePage('back')}>
@@ -57,6 +55,10 @@ class Breweries extends Component {
 					onClick={(e) => this.props.changePage('forward')}>
 					Next 20
 				</button>
+			</div>
+				<section className="Breweries">
+					{this.makeBreweryList()}
+				</section>
 				{ this.state.brewery && this.state.showDetails ? (
 				<BreweryDetails
 					show={this.state.showDetails}
@@ -66,7 +68,7 @@ class Breweries extends Component {
 					addFavorite={this.props.addFavorite}
 					removeFavorite={this.props.removeFavorite}
 				/> ) : null }
-			</div>
+			</>
 		)
 	}
 }

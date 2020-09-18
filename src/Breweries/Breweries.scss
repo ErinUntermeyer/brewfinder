@@ -2,18 +2,20 @@
 
 .Breweries {
 	@include cardContainer();
-	margin-top: 30px;
+	margin-top: 5px;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(5, 1fr);
 }
 
 .brewery-box {
+	display: flex;
+	flex-direction: column;;
+	justify-content: center;
 	background: $grey;
 	border-radius: 10px;
-	align-items: center;
 	overflow: scroll;
 	height: inherit;
-	height: 15vh;
+	height: 190px;
 	width: 100%;
 	padding: 10px;
 	position: relative;
@@ -22,15 +24,12 @@
 .Breweries h3 {
 	color: $teal;
 	font-size: 22px;
-	// text-align: start;
 }
 
 .Breweries p {
 	color: $bone;
 	font-size: 16px;
 	margin: 10px 0 10px 0;
-	// text-align: end;
-	// margin-left: 20px;
 }
 
 .details-button {
@@ -54,6 +53,13 @@
 	}
 }
 
+.page-button-box {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 147px;
+}
+
 .back-button, .forward-button {
 	@include greyButton();
+	color: $teal;
 }
