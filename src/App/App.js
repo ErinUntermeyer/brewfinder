@@ -87,7 +87,7 @@ class App extends Component {
 
 	removeFavorite = brewery => {
 		this.setState({ favoriteIds: this.state.favoriteIds.filter(favorite => favorite !== brewery.id) })
-		this.setState({ favoriteBreweriesData: this.state.favoriteBreweriesData.filter(favorite => favorite !== brewery) })
+		this.setState({ favoriteBreweriesData: this.state.favoriteBreweriesData.filter(favorite => favorite.id !== brewery.id) })
 	}
 
 	displayWarning = message => {
