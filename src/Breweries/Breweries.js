@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import BreweryDetails from '../BreweryDetails/BreweryDetails'
 import './Breweries.scss'
 
-import { breweries } from '../helpers/data'
+// import { breweries } from '../helpers/data'
 
 class Breweries extends Component {
 	constructor(props) {
@@ -22,8 +22,8 @@ class Breweries extends Component {
 	}
 
 	makeBreweryList = () => {
-		// return this.props.breweries.map(brewery => {
-		return breweries.map(brewery => {
+		return this.props.breweries.map(brewery => {
+		// return breweries.map(brewery => {
 			return (
 				<article className="brewery-box" key={brewery.id}>
 					<h3>{brewery.name}</h3>
