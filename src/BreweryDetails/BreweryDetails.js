@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import cheers from '../assets/cheers.png'
 import './BreweryDetails.scss'
 
-const BreweryDetails = ({ show, handleClose, brewery, favorites, addFavorite, removeFavorite }) => {
+const BreweryDetails = ({ show, handleClose, brewery, favoriteIds, addFavorite, removeFavorite }) => {
 	
 	const toggleClassName = show ? "modal display-block" : "modal display-none"
-	
+
 	const determineFavorite = () => {
-		// bug here if you change pages and go back, the button doesn't say unfavorite if it's included in the favorites array
-		if (favorites === undefined || !favorites.includes(brewery)) {
+		if (favoriteIds === undefined || !favoriteIds.find(id => id === brewery.id)) {
 			return (
 				<button onClick={(e) => addFavorite(brewery)}>
 					<img src={cheers} alt="Two glasses clinking together" className="cheers-details" />
@@ -54,7 +53,7 @@ BreweryDetails.propTypes = {
 	show: PropTypes.bool.isRequired,
 	handleClose: PropTypes.func.isRequired,
 	brewery: PropTypes.object.isRequired,
-	favorites: PropTypes.array.isRequired,
+	favoriteIds: PropTypes.array,
 	addFavorite: PropTypes.func.isRequired,
 	removeFavorite: PropTypes.func.isRequired
 }

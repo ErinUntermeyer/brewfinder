@@ -5,9 +5,9 @@ import './Favorites.scss'
 
 // import { favorites } from '../helpers/data'
 
-const Favorites = ({ favorites, removeFavorite }) => {
+const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 
-	const favoritesList = favorites.map(favorite => {
+	const favoritesList = favoriteBreweriesData.map(favorite => {
 		return (
 			<article className="favorites-box" key={favorite.id}>
 				<h1>{favorite.name}</h1>
@@ -32,7 +32,7 @@ const Favorites = ({ favorites, removeFavorite }) => {
 
 	return (
 		<div>
-			{favorites.length === 0 ?
+			{favoriteBreweriesData.length === 0 ?
 			<h1 className="no-favorites-msg">Currently, you have no favorites. Go add some!</h1> :
 			<section className="Favorites">
 				{favoritesList}
@@ -45,6 +45,6 @@ const Favorites = ({ favorites, removeFavorite }) => {
 export default Favorites
 
 Favorites.propTypes = {
-	favorites: PropTypes.array.isRequired,
+	favoriteBreweriesData: PropTypes.array,
 	removeFavorite: PropTypes.func.isRequired
 }
