@@ -35,7 +35,15 @@
 .Brewery-details h1 {
 	@include headerFont(48px);
 	color: $grey;
-	margin: 20px;
+	margin: 20px 0 0 0;
+}
+
+.type {
+	color: $grey;
+	font-style: italic;
+	font-size: 16px;
+	margin: 0 0 20px 0;
+	filter: drop-shadow(1px 1px 1px $grey);
 }
 
 .Brewery-details h2 {
@@ -48,10 +56,10 @@
 	color: $grey;
 }
 
-.Brewery-details p {
-	margin: 20px;
+.phone {
 	color: $grey;
 	font-weight: bold;
+	margin: 20px;
 }
 
 .details-button-box {
