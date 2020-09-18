@@ -37,7 +37,28 @@ const About = () => {
 					<img src={orangeRedBeer} alt="Beer mug" className="about-logo" />
 					<h1>credits</h1>
 				</div>
-				credits go here
+				<p>
+					developed by:
+					<a
+					href="https://github.com/ErinUntermeyer"
+					target="_blank"
+					rel="noopener noreferrer">
+					Erin Untermeyer</a>
+					<br></br>
+					data sourced from:
+					<a
+					href="https://www.openbrewerydb.org/"
+					target="_blank"
+					rel="noopener noreferrer">
+					Open Brewery DB</a>
+					<br></br>
+					icons:
+					<a
+					href="https://www.flaticon.com/home"
+					target="_blank"
+					rel="noopener noreferrer">
+					Flat Icon</a>
+				</p>
 			</article>
 		</section>
 	)
