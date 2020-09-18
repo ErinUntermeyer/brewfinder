@@ -30,7 +30,36 @@ const About = () => {
 					<img src={orangeRedBeer} alt="Beer mug" className="about-logo" />
 					<h1>related links</h1>
 				</div>
-				related links go here
+				<p>
+				<a
+					href="https://coloradobeer.org/events/"
+					target="_blank"
+					rel="noopener noreferrer">
+					Colorado Beer Events
+				</a>
+				<br></br>
+				<a
+					href="https://www.colorado.com/events/durango-brew-train"
+					target="_blank"
+					rel="noopener noreferrer">
+					Durango Brew Train
+				</a>
+				<br></br>
+				<a
+					href="https://www.denver.org/restaurants/denver-bars-clubs/denver-beer-trail/"
+					target="_blank"
+					rel="noopener noreferrer">
+					Denver Beer Trail
+				</a>
+				<br></br>
+				<a
+					href="https://beerfests.com/us/colorado-beer-festivals/"
+					target="_blank"
+					rel="noopener noreferrer">
+					Colorado Beer Festivals
+				</a>
+				<br></br>
+				</p>
 			</article>
 			<article className="credits">
 				<div className="about-title-box">
@@ -40,24 +69,27 @@ const About = () => {
 				<p>
 					developed by:
 					<a
-					href="https://github.com/ErinUntermeyer"
-					target="_blank"
-					rel="noopener noreferrer">
-					Erin Untermeyer</a>
+						href="https://github.com/ErinUntermeyer"
+						target="_blank"
+						rel="noopener noreferrer">
+						Erin Untermeyer
+					</a>
 					<br></br>
 					data sourced from:
 					<a
-					href="https://www.openbrewerydb.org/"
-					target="_blank"
-					rel="noopener noreferrer">
-					Open Brewery DB</a>
+						href="https://www.openbrewerydb.org/"
+						target="_blank"
+						rel="noopener noreferrer">
+						Open Brewery DB
+					</a>
 					<br></br>
 					icons:
 					<a
-					href="https://www.flaticon.com/home"
-					target="_blank"
-					rel="noopener noreferrer">
-					Flat Icon</a>
+						href="https://www.flaticon.com/home"
+						target="_blank"
+						rel="noopener noreferrer">
+						Flat Icon
+					</a>
 				</p>
 			</article>
 		</section>
