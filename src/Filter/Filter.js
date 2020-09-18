@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import barSign from '../assets/bar-sign.png'
 import './Filter.scss'
 
@@ -38,3 +39,8 @@ const Filter = ({ setStateByType, type }) => {
 }
 
 export default Filter
+
+Filter.propTypes = {
+	setStateByType: PropTypes.func.isRequired,
+	type: PropTypes.string.isRequired
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import cheers from '../assets/cheers.png'
 import './BreweryDetails.scss'
 
@@ -48,3 +49,12 @@ const BreweryDetails = ({ show, handleClose, brewery, favorites, addFavorite, re
 }
 
 export default BreweryDetails
+
+BreweryDetails.propTypes = {
+	show: PropTypes.bool.isRequired,
+	handleClose: PropTypes.func.isRequired,
+	brewery: PropTypes.object.isRequired,
+	favorites: PropTypes.array.isRequired,
+	addFavorite: PropTypes.func.isRequired,
+	removeFavorite: PropTypes.func.isRequired
+}
