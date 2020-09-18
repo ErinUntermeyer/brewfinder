@@ -78,13 +78,13 @@ class App extends Component {
 	}
 
 	addFavorite = brewery => {
-		if (!this.state.favorites.includes(brewery)) {
-			this.setState({ favorites: [...this.state.favorites, brewery] })
+		if (!this.state.favorites.find(id => id === brewery.id)) {
+			this.setState({ favorites: [...this.state.favorites, brewery.id] })
 		}
 	}
 
 	removeFavorite = brewery => {
-		this.setState({ favorites: this.state.favorites.filter(favorite => favorite !== brewery) })
+		this.setState({ favorites: this.state.favorites.filter(favorite => favorite !== brewery.id) })
 	}
 
 	displayWarning = message => {

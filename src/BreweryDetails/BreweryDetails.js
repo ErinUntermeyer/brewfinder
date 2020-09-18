@@ -6,10 +6,9 @@ import './BreweryDetails.scss'
 const BreweryDetails = ({ show, handleClose, brewery, favorites, addFavorite, removeFavorite }) => {
 	
 	const toggleClassName = show ? "modal display-block" : "modal display-none"
-	
+
 	const determineFavorite = () => {
-		// bug here if you change pages and go back, the button doesn't say unfavorite if it's included in the favorites array
-		if (favorites === undefined || !favorites.includes(brewery)) {
+		if (favorites === undefined || !favorites.find(id => id === brewery.id)) {
 			return (
 				<button onClick={(e) => addFavorite(brewery)}>
 					<img src={cheers} alt="Two glasses clinking together" className="cheers-details" />
