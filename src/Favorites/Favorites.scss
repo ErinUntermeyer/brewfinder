@@ -35,10 +35,16 @@
 	color: $bone;
 }
 
-.Favorites p {
+.fav-phone {
 	margin: 18px;
 	color: $bone;
 	font-weight: bold;
+}
+
+.fav-type {
+	color: $golden;
+	font-style: italic;
+	font-size: 16px;
 }
 
 .buttons-box {
