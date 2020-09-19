@@ -16,7 +16,8 @@ class App extends Component {
 			pageNumber: 1,
 			favoriteIds: [],
 			favoriteBreweriesData: [],
-			type: "all",
+			type: '',
+			city: '',
 			warning: '',
 			error: ''
 		}
@@ -27,13 +28,13 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === "all") {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === '') {
 			this.getBreweries()
 		}
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== "all") {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== '') {
 			this.filterBreweriesByType(this.state.type)
 		}
-		if (this.state.type !== prevState.type && this.state.type === "all") {
+		if (this.state.type !== prevState.type && this.state.type === '') {
 			this.setState({ pageNumber: 1 })
 			this.getBreweries()
 		}
@@ -63,18 +64,23 @@ class App extends Component {
 			})
 	}
 
+	setStateByType = type => {
+		this.setState({ type: type })
+	}
+
 	filterBreweriesByCity = city => {
 		getBreweriesByCity(city, this.state.pageNumber)
 			.then(data => {
-				this.setState({ breweries: data})
+				this.setState({ breweries: data })
+				this.setState({ city: city })
 			})
 			.catch(error => {
 				this.setState({ error: 'I\'m sorry, there are no breweries listed for that city. Please try another one!' })
 			})
 	}
 
-	setStateByType = type => {
-		this.setState({ type: type })
+	clearCityFromState = () => {
+		this.setState({ city: '' })
 	}
 
 	changePage = direction => {
@@ -120,6 +126,8 @@ class App extends Component {
 							setStateByType={this.setStateByType}
 							type={this.state.type}
 							filterBreweriesByCity={this.filterBreweriesByCity}
+							city={this.state.city}
+							clearCityFromState={this.clearCityFromState}
 						/>
 						{this.state.warning ? <p className="warning">{this.state.warning}</p> : <p className= "warning-space">.</p>}
 						<Breweries
