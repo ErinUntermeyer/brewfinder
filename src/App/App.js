@@ -28,11 +28,14 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === '') {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === '' && this.state.city === '') {
 			this.getBreweries()
 		}
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== '') {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== '' && this.state.city === '') {
 			this.filterBreweriesByType(this.state.type)
+		}
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.city !== '' && this.state.type === '') {
+			this.filterBreweriesByCity(this.state.city)
 		}
 		if (this.state.type !== prevState.type && this.state.type === '') {
 			this.setState({ pageNumber: 1 })
@@ -41,6 +44,10 @@ class App extends Component {
 		if (this.state.type !== prevState.type) {
 			this.setState({ pageNumber: 1 })
 			this.filterBreweriesByType(this.state.type)
+		}
+		if (this.state.city !== prevState.city) {
+			this.setState({ pageNumber: 1 })
+			this.filterBreweriesByCity(this.state.city)
 		}
 	}
 
@@ -66,6 +73,7 @@ class App extends Component {
 
 	setStateByType = type => {
 		this.setState({ type: type })
+		this.setState({ city: '' })
 	}
 
 	filterBreweriesByCity = city => {
@@ -73,6 +81,7 @@ class App extends Component {
 			.then(data => {
 				this.setState({ breweries: data })
 				this.setState({ city: city })
+				this.setState({ type: '' })
 			})
 			.catch(error => {
 				this.setState({ error: 'I\'m sorry, there are no breweries listed for that city. Please try another one!' })
