@@ -12,14 +12,19 @@ class Filter extends Component {
 		}
 	}
 
-	handleInput(e) {
+	handleInput = e => {
 		const inputValue = e.target.value
 		this.setState({ input: inputValue })
 	}
 
-	handleSubmit(e) {
+	clearInput = () => {
+		this.setState({ input: '' })
+	}
+
+	handleSubmit= e => {
 		e.preventDefault()
 		this.props.filterBreweriesByCity(this.state.input)
+		this.clearInput()
 	}
 
 	render() {
@@ -48,10 +53,10 @@ class Filter extends Component {
 						<button onClick={(e) => this.props.setStateByType("proprietor")}>
 							proprietor
 						</button>
-						<button onClick={(e) => this.props.setStateByType("all")}>
+						<button onClick={(e) => this.props.setStateByType("")}>
 							all
 						</button>
-						<p className="current-filter">current filter: {this.props.type}</p>
+						{this.props.type !== "" && <p className="current-filter">current filter: {this.props.type}</p>}
 					</div>
 				</section>
 				<p className="or">OR</p>
@@ -60,14 +65,16 @@ class Filter extends Component {
 					<form
 						className='search-form'
 						onSubmit={(e) => this.handleSubmit(e)}>
-							<label htmlFor='search'>search by city</label>
-							<input
-								className='search-input'
-								type='text'
-								id='search'
-								value={this.state.input}
-								onChange={(e) => this.handleInput(e)}/>
+						<label htmlFor='search'>search by city</label>
+						<input
+							className='search-input'
+							type='text'
+							id='search'
+							value={this.state.input}
+							onChange={(e) => this.handleInput(e)}/>
 						<button type='submit' className="search-button">search</button>
+						<button onClick={(e) => this.props.clearCityFromState()} className="clear-button">reset</button>
+						{this.props.city !== "" && <p className="current-filter">current city: {this.props.city}</p>}
 					</form>
 				</section>
 			</div>
@@ -79,5 +86,8 @@ export default Filter
 
 Filter.propTypes = {
 	setStateByType: PropTypes.func.isRequired,
-	type: PropTypes.string.isRequired
+	type: PropTypes.string.isRequired,
+	filterBreweriesByCity: PropTypes.func.isRequired,
+	city: PropTypes.string.isRequired,
+	clearCityFromState: PropTypes.func.isRequired,
 }
