@@ -72,16 +72,17 @@ class App extends Component {
 	}
 
 	setStateByType = type => {
-		this.setState({ type: type })
-		this.setState({ city: '' })
+		this.setState({ type: type, city: '' })
 	}
 
 	filterBreweriesByCity = city => {
 		getBreweriesByCity(city, this.state.pageNumber)
 			.then(data => {
-				this.setState({ breweries: data })
-				this.setState({ city: city })
-				this.setState({ type: '' })
+				if (data.length > 0) {
+					this.setState({ breweries: data, city: city, type: '' })
+				} else if (data.length === 0) {
+					this.setState({ breweries: data, city: 'invalid entry', type: '' })
+				}
 			})
 			.catch(error => {
 				this.setState({ error: 'I\'m sorry, there are no breweries listed for that city. Please try another one!' })
