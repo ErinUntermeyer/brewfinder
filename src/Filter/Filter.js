@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import barSign from '../assets/bar-sign.png'
+import search from '../assets/search.png'
 import './Filter.scss'
 
 class Filter extends Component {
@@ -23,7 +24,7 @@ class Filter extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="Filter-Search-container">
 				<section className="Filter">
 					<img src={barSign} alt="Bar sign with a beer on it" className="bar-sign"/>
 					<p>filter by<br></br> brewery type</p>
@@ -53,18 +54,20 @@ class Filter extends Component {
 						<p className="current-filter">current filter: {this.props.type}</p>
 					</div>
 				</section>
-				<section className="Filter-search">
+				<p className="or">OR</p>
+				<section className="Search">
+					<img src={search} alt="Magnifying glass with city in it" className="search-icon" />
 					<form
 						className='search-form'
 						onSubmit={(e) => this.handleSubmit(e)}>
-							<label htmlFor='search'>Search by city:</label>
+							<label htmlFor='search'>search by city</label>
 							<input
 								className='search-input'
 								type='text'
 								id='search'
 								value={this.state.input}
 								onChange={(e) => this.handleInput(e)}/>
-						<button type='submit'>search</button>
+						<button type='submit' className="search-button">search</button>
 					</form>
 				</section>
 			</div>

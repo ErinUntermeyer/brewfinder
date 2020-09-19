@@ -1,5 +1,11 @@
 @import '../styles/_variables.scss';
 
+.Filter-Search-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .Filter {
 	display: flex;
 	justify-content: center;
@@ -28,4 +34,41 @@
 
 .current-filter {
 	margin: 10px 0 0 70px;
+}
+
+.or {
+	@include headerFont(48px);
+	color: $teal;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 100px 0 100px;
+}
+
+.Search {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.search-input {
+	@include textFont(20px);
+	width: 25%;
+	border: none;
+	border-bottom: solid 2px $grey;
+	background: transparent;
+}
+
+.search-icon {
+	height: 6vh;
+}
+
+.search-button {
+	@include greyButton;
+	margin-left: 10px;
+}
+
+label {
+	margin-right: 10px;
 }
