@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import { get20BreweriesByPage, getBreweriesByType } from '../helpers/apiCalls'
+import { get20BreweriesByPage, getBreweriesByType, getBreweriesByCity } from '../helpers/apiCalls'
 import Header from '../Header/Header'
 import Breweries from '../Breweries/Breweries'
 import Filter from '../Filter/Filter'
@@ -63,6 +63,16 @@ class App extends Component {
 			})
 	}
 
+	filterBreweriesByCity = city => {
+		getBreweriesByCity(city, this.state.pageNumber)
+			.then(data => {
+				this.setState({ breweries: data})
+			})
+			.catch(error => {
+				this.setState({ error: 'I\'m sorry, there are no breweries listed for that city. Please try another one!' })
+			})
+	}
+
 	setStateByType = type => {
 		this.setState({ type: type })
 	}
@@ -109,8 +119,9 @@ class App extends Component {
 						<Filter 
 							setStateByType={this.setStateByType}
 							type={this.state.type}
+							filterBreweriesByCity={this.filterBreweriesByCity}
 						/>
-								{this.state.warning ? <p className="warning">{this.state.warning}</p> : <p className= "warning-space">.</p>}
+						{this.state.warning ? <p className="warning">{this.state.warning}</p> : <p className= "warning-space">.</p>}
 						<Breweries
 							breweries={this.state.breweries}
 							changePage={this.changePage}
