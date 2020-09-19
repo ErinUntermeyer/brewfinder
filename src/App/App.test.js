@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { get20BreweriesByPage, getBreweriesByType } from '../helpers/apiCalls'
+import { breweries } from '../helpers/data'
 jest.mock('../helpers/apiCalls')
 
 describe('App Component', () => {
@@ -88,12 +89,14 @@ describe('App Component', () => {
 		expect(error).toBeInTheDocument()
 	})
 
-	it.skip('Should allow a user to view previous/next 20 breweries', async () => {
-		//researching aftereach cleanup
-		// jest.clearAllMocks()
-		get20BreweriesByPage.mockResolvedValue(mockedBreweries)
-		render(<MemoryRouter><App /></MemoryRouter>)
-		const forwardButton = screen.getByRole('button', { name: /next 20/i })
+	it('Should allow a user to view previous/next 20 breweries', async () => {
+		get20BreweriesByPage.mockClear()
+		// using test data here so that breweries are greater than 20, allowing for the get20BreweriesByPage to be called twice
+		get20BreweriesByPage.mockResolvedValue(breweries)
+		const { findByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+
+		const forwardButton = await findByRole('button', { name: /next 20/i })
+		expect(forwardButton).toBeInTheDocument()
 		fireEvent.click(forwardButton)
 		expect(get20BreweriesByPage).toBeCalledTimes(2)
 	})
