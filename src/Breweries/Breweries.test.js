@@ -48,13 +48,14 @@ describe('Breweries Component', () => {
 				<Breweries
 					breweries={breweries}
 					changePage={jest.fn()}
+					favoriteIds={[]}
+					addFavorite={jest.fn()}
+					removeFavorite={jest.fn()}
 				/>
 			</MemoryRouter>
 		)
-		
 		const title1 = screen.getByRole('heading', { name: /casey and khalid\'s backup plan/i })
 		const title2 = screen.getByRole('heading', { name: /diners, drive-ins and devs/i })
-
 		expect(title1).toBeInTheDocument()
 		expect(title2).toBeInTheDocument()
 	})
@@ -66,15 +67,37 @@ describe('Breweries Component', () => {
 				<Breweries
 					breweries={breweries}
 					changePage={changePage}
+					favoriteIds={[]}
+					addFavorite={jest.fn()}
+					removeFavorite={jest.fn()}
 				/>
 			</MemoryRouter>
 		)
-
 		const forwardButton = screen.getByRole('button', { name: /next 20/i })
 		const backButton = screen.getByRole('button', { name: /previous 20/i })
 		fireEvent.click(forwardButton)
 		fireEvent.click(backButton)
 		expect(changePage).toBeCalledTimes(2)
+	})
+
+	it('Should render brewery details when details button clicked', () => {
+		render(
+			<MemoryRouter>
+				<Breweries
+					breweries={breweries}
+					changePage={jest.fn()}
+					favoriteIds={[]}
+					addFavorite={jest.fn()}
+					removeFavorite={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const details = screen.getAllByRole('button', { name: /view details/i })
+		expect(details[0]).toBeInTheDocument()
+		fireEvent.click(details[0])
+		const name = screen.getAllByText(/casey and khalid\'s backup plan/i)
+		expect(name[0]).toBeInTheDocument()
+		expect(name[1]).toBeInTheDocument()
 	})
 
 })
