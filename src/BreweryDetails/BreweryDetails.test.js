@@ -124,5 +124,22 @@ describe('BreweryDetails Component', () => {
 		fireEvent.click(removeFavoriteButton)
 		expect(removeFavorite).toBeCalledTimes(1)
 	})
+
+	it('Should link to the brewery website', () => {
+		render(
+			<MemoryRouter>
+				<BreweryDetails
+					show={true}
+					handleClose={jest.fn()}
+					brewery={brewery}
+					favoriteIds={[]}
+					addFavorite={jest.fn()}
+					removeFavorite={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const websiteLink = screen.getByRole('link', { name: /view website/i })
+		expect(websiteLink.getAttribute('href')).toBe('http://www.brewrific.com')
+	})
 	
 })
