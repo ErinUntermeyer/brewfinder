@@ -3,12 +3,12 @@ import App from './App'
 import { MemoryRouter } from 'react-router-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { get20BreweriesByPage, getBreweriesByType } from '../helpers/apiCalls'
+import { get20BreweriesByPage, getBreweriesByType, getBreweriesByCity } from '../helpers/apiCalls'
 import { breweries } from '../helpers/data'
 jest.mock('../helpers/apiCalls')
 
 describe('App Component', () => {
-	let mockedBreweries, mockedBreweriesByType
+	let mockedBreweries, mockedBreweriesByType, mockedBreweriesByCity
 
 	beforeEach(() => {
 		mockedBreweries = [
@@ -32,9 +32,9 @@ describe('App Component', () => {
 				"name": "Diners, Drive-ins and Devs",
 				"brewery_type": "brewpub",
 				"street": "555 Fuhgetaboutit",
-				"city": "Denver",
+				"city": "Boulder",
 				"state": "Colorado",
-				"postal_code": "80206",
+				"postal_code": "80301",
 				"country": "United States",
 				"longitude": "-110",
 				"latitude": "42",
@@ -44,6 +44,23 @@ describe('App Component', () => {
 			}
 		]
 		mockedBreweriesByType = [
+			{
+				"id": 1234,
+				"name": "Casey and Khalid's Backup Plan",
+				"brewery_type": "micro",
+				"street": "123 Turing Ave",
+				"city": "Denver",
+				"state": "Colorado",
+				"postal_code": "80203",
+				"country": "United States",
+				"longitude": "-100",
+				"latitude": "40",
+				"phone": "5555555555",
+				"website_url": "http://www.backupplan.com",
+				"updated_at": "now"
+			}
+		]
+		mockedBreweriesByCity = [
 			{
 				"id": 1234,
 				"name": "Casey and Khalid's Backup Plan",
@@ -71,6 +88,21 @@ describe('App Component', () => {
 		expect(title).toBeInTheDocument()
 		expect(tagline).toBeInTheDocument()
 		expect(navButton).toBeInTheDocument()
+	})
+
+	it('Should allow a user to view the about page', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		const { findByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		const aboutButton = await findByRole('link', { name: /about/i })
+		fireEvent.click(aboutButton)
+		const summary = screen.getByRole('heading', { name: /summary/i })
+		const definitions = screen.getByRole('heading', { name: /definitions/i })
+		const relatedLinks = screen.getByRole('heading', { name: /related links/i })
+		const credits = screen.getByRole('heading', { name: /credits/i })
+		expect(summary).toBeInTheDocument()
+		expect(definitions).toBeInTheDocument()
+		expect(relatedLinks).toBeInTheDocument()
+		expect(credits).toBeInTheDocument()
 	})
 
 	it('Should fetch a brewery list upon load', async () => {
@@ -203,7 +235,7 @@ describe('App Component', () => {
 		expect(name).not.toBeInTheDocument()
 	})
 
-	it('Should fetch breweries by type when filter button clicked', async () => {
+	it('Should allow a user to filter by brewery type', async () => {
 		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		getBreweriesByType.mockResolvedValueOnce(mockedBreweriesByType)
 		render(<MemoryRouter><App /></MemoryRouter>)
@@ -212,19 +244,15 @@ describe('App Component', () => {
 		expect(getBreweriesByType).toBeCalledTimes(1)
 	})
 
-	it('Should allow a user to view the about page', async () => {
+	it('Should allow a user to search by city', async () => {
 		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
-		const { findByRole } = render(<MemoryRouter><App /></MemoryRouter>)
-		const aboutButton = await findByRole('link', { name: /about/i })
-		fireEvent.click(aboutButton)
-		const summary = screen.getByRole('heading', { name: /summary/i })
-		const definitions = screen.getByRole('heading', { name: /definitions/i })
-		const relatedLinks = screen.getByRole('heading', { name: /related links/i })
-		const credits = screen.getByRole('heading', { name: /credits/i })
-		expect(summary).toBeInTheDocument()
-		expect(definitions).toBeInTheDocument()
-		expect(relatedLinks).toBeInTheDocument()
-		expect(credits).toBeInTheDocument()
+		getBreweriesByCity.mockResolvedValue(mockedBreweriesByCity)
+		render(<MemoryRouter><App /></MemoryRouter>)
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		const input = screen.getByRole('textbox')
+		fireEvent.change(input, { target: { value: /denver/i } })
+		fireEvent.click(searchButton)
+		expect(getBreweriesByCity).toBeCalledTimes(1)
 	})
 
 })
