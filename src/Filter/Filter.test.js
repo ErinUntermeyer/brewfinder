@@ -1,17 +1,20 @@
 import React from 'react'
 import Filter from './Filter'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, findByText } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Filter Component', () => {
 
-	it('Should display text and buttons', () => {
+	it('Should display filter buttons', () => {
 		render(
 			<MemoryRouter>
 				<Filter
 					setStateByType={jest.fn()}
 					type={'type'}
+					filterBreweriesByCity={jest.fn()}
+					city={'Denver'}
+					clearCityFromState={jest.fn()}
 				/>
 			</MemoryRouter>
 		)
@@ -40,6 +43,9 @@ describe('Filter Component', () => {
 				<Filter
 					setStateByType={setStateByType}
 					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'Denver'}
+					clearCityFromState={jest.fn()}
 				/>
 			</MemoryRouter>
 		)
@@ -47,6 +53,42 @@ describe('Filter Component', () => {
 		fireEvent.click(micro)
 		expect(setStateByType).toBeCalledTimes(1)
 		expect(setStateByType).toBeCalledWith('micro')
+	})
+
+	it('Should display a search field for city name', () => {
+		render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'Denver'}
+					clearCityFromState={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const searchField = screen.getByRole('textbox')
+		expect(searchField).toBeInTheDocument()
+	})
+
+	it('Should display the search input below search field', async () => {
+		const { findByText } = render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'Denver'}
+					clearCityFromState={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const searchField = screen.getByRole('textbox')
+		fireEvent.change(searchField, { target: { value: /denver/i } })
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		const description = await findByText(/current city: denver/i)
+		expect(description).toBeInTheDocument()
 	})
 
 })

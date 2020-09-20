@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import { get20BreweriesByPage, getBreweriesByType } from '../helpers/apiCalls'
+import { get20BreweriesByPage, getBreweriesByType, getBreweriesByCity } from '../helpers/apiCalls'
 import Header from '../Header/Header'
 import Breweries from '../Breweries/Breweries'
 import Filter from '../Filter/Filter'
@@ -16,7 +16,8 @@ class App extends Component {
 			pageNumber: 1,
 			favoriteIds: [],
 			favoriteBreweriesData: [],
-			type: "all",
+			type: '',
+			city: '',
 			warning: '',
 			error: ''
 		}
@@ -27,19 +28,26 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === "all") {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type === '' && this.state.city === '') {
 			this.getBreweries()
 		}
-		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== "all") {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.type !== '' && this.state.city === '') {
 			this.filterBreweriesByType(this.state.type)
 		}
-		if (this.state.type !== prevState.type && this.state.type === "all") {
+		if (this.state.pageNumber !== prevState.pageNumber && this.state.city !== '' && this.state.type === '') {
+			this.filterBreweriesByCity(this.state.city)
+		}
+		if (this.state.type !== prevState.type && this.state.type === '') {
 			this.setState({ pageNumber: 1 })
 			this.getBreweries()
 		}
 		if (this.state.type !== prevState.type) {
 			this.setState({ pageNumber: 1 })
 			this.filterBreweriesByType(this.state.type)
+		}
+		if (this.state.city !== prevState.city) {
+			this.setState({ pageNumber: 1 })
+			this.filterBreweriesByCity(this.state.city)
 		}
 	}
 
@@ -64,7 +72,25 @@ class App extends Component {
 	}
 
 	setStateByType = type => {
-		this.setState({ type: type })
+		this.setState({ type: type, city: '' })
+	}
+
+	filterBreweriesByCity = city => {
+		getBreweriesByCity(city, this.state.pageNumber)
+			.then(data => {
+				if (data.length > 0) {
+					this.setState({ breweries: data, city: city, type: '' })
+				} else if (data.length === 0) {
+					this.setState({ breweries: data, city: 'invalid entry', type: '' })
+				}
+			})
+			.catch(error => {
+				this.setState({ error: 'I\'m sorry, we could not retrieve any breweries at this time. Please try again later!' })
+			})
+	}
+
+	clearCityFromState = () => {
+		this.setState({ city: '' })
 	}
 
 	changePage = direction => {
@@ -109,8 +135,11 @@ class App extends Component {
 						<Filter 
 							setStateByType={this.setStateByType}
 							type={this.state.type}
+							filterBreweriesByCity={this.filterBreweriesByCity}
+							city={this.state.city}
+							clearCityFromState={this.clearCityFromState}
 						/>
-								{this.state.warning ? <p className="warning">{this.state.warning}</p> : <p className= "warning-space">.</p>}
+						{this.state.warning ? <p className="warning">{this.state.warning}</p> : <p className= "warning-space">.</p>}
 						<Breweries
 							breweries={this.state.breweries}
 							changePage={this.changePage}

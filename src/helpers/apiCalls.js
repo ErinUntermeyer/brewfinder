@@ -27,3 +27,17 @@ export const getBreweriesByType = (type, pageNumber) => {
 			}
 		})
 }
+
+export const getBreweriesByCity = (city, pageNumber) => {
+	return fetch(`${baseUrl}&per_page=20&page=${pageNumber}&by_city=${city}`)
+		.then(response => {
+			if (response.ok) {
+				return response.json()
+					.then(data => {
+						return data
+					})
+			} else {
+				throw response
+			}
+		})
+}
