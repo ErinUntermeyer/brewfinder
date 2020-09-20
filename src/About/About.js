@@ -3,7 +3,6 @@ import orangeRedBeer from '../assets/orangeRed-beer.png'
 import './About.scss'
 
 const About = () => {
-
 	return (
 		<section className="About">
 			<article className="summary">

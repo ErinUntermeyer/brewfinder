@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { get20BreweriesByPage, getBreweriesByType, getBreweriesByCity } from '../helpers/apiCalls'
 import Header from '../Header/Header'
+import About from '../About/About'
+import Favorites from '../Favorites/Favorites'
 import Breweries from '../Breweries/Breweries'
 import Filter from '../Filter/Filter'
-import Favorites from '../Favorites/Favorites'
-import About from '../About/About'
 import './App.scss'
 
 class App extends Component {

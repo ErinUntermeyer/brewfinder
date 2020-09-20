@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import BreweryDetails from '../BreweryDetails/BreweryDetails'
 import './Breweries.scss'
 
-// import { breweries } from '../helpers/data'
-
 class Breweries extends Component {
 	constructor(props) {
 		super(props)
@@ -24,7 +22,6 @@ class Breweries extends Component {
 
 	makeBreweryList = () => {
 		return this.props.breweries.map(brewery => {
-		// return breweries.map(brewery => {
 			return (
 				<article className="brewery-box" key={brewery.id}>
 					<h3>{brewery.name}</h3>
@@ -57,10 +54,10 @@ class Breweries extends Component {
 					Next 20
 				</button>
 			</div>
-				<section className="Breweries">
-					{this.makeBreweryList()}
-				</section>
-				{ this.state.brewery && this.state.showDetails ? (
+			<section className="Breweries">
+				{this.makeBreweryList()}
+			</section>
+			{ this.state.brewery && this.state.showDetails ? (
 				<BreweryDetails
 					show={this.state.showDetails}
 					handleClose={this.hideDetails}
@@ -68,7 +65,8 @@ class Breweries extends Component {
 					favoriteIds={this.props.favoriteIds}
 					addFavorite={this.props.addFavorite}
 					removeFavorite={this.props.removeFavorite}
-				/> ) : null }
+				/>
+			) : null }
 			</>
 		)
 	}
