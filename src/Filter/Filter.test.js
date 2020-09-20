@@ -1,7 +1,7 @@
 import React from 'react'
 import Filter from './Filter'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, findByText } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Filter Component', () => {
@@ -69,6 +69,26 @@ describe('Filter Component', () => {
 		)
 		const searchField = screen.getByRole('textbox')
 		expect(searchField).toBeInTheDocument()
+	})
+
+	it('Should display the search input below search field', async () => {
+		const { findByText } = render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'Denver'}
+					clearCityFromState={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const searchField = screen.getByRole('textbox')
+		fireEvent.change(searchField, { target: { value: /denver/i } })
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		const description = await findByText(/current city: denver/i)
+		expect(description).toBeInTheDocument()
 	})
 
 })
