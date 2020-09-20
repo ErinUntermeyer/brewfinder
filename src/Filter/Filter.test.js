@@ -1,7 +1,7 @@
 import React from 'react'
 import Filter from './Filter'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent, findByText } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Filter Component', () => {
@@ -36,7 +36,7 @@ describe('Filter Component', () => {
 		expect(all).toBeInTheDocument()
 	})
 
-	it('Should fire the correct method when button clicked', () => {
+	it('Should fire the correct method when type button clicked', () => {
 		const setStateByType = jest.fn()
 		render(
 			<MemoryRouter>
@@ -69,6 +69,24 @@ describe('Filter Component', () => {
 		)
 		const searchField = screen.getByRole('textbox')
 		expect(searchField).toBeInTheDocument()
+	})
+
+	it('Should fire the correct methods when search button clicked', () => {
+		const filterBreweriesByCity = jest.fn()
+		render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={filterBreweriesByCity}
+					city={'Denver'}
+					clearCityFromState={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		expect(filterBreweriesByCity).toBeCalledTimes(1)
 	})
 
 	it('Should display the search input below search field', async () => {
