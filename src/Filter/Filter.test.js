@@ -89,6 +89,24 @@ describe('Filter Component', () => {
 		expect(filterBreweriesByCity).toBeCalledTimes(1)
 	})
 
+	it('Should fire the correct methods when reset button clicked', () => {
+		const clearCityFromState = jest.fn()
+		render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'Denver'}
+					clearCityFromState={clearCityFromState}
+				/>
+			</MemoryRouter>
+		)
+		const resetButton = screen.getByRole('button', { name: /reset/i })
+		fireEvent.click(resetButton)
+		expect(clearCityFromState).toBeCalledTimes(1)
+	})
+
 	it('Should display the search input below search field', async () => {
 		const { findByText } = render(
 			<MemoryRouter>
