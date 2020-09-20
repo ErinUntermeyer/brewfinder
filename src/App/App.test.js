@@ -1,7 +1,7 @@
 import React from 'react'
 import App from './App'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, findByText } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { get20BreweriesByPage, getBreweriesByType, getBreweriesByCity } from '../helpers/apiCalls'
 import { breweries } from '../helpers/data'
@@ -248,11 +248,23 @@ describe('App Component', () => {
 		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		getBreweriesByCity.mockResolvedValue(mockedBreweriesByCity)
 		render(<MemoryRouter><App /></MemoryRouter>)
-		const searchButton = screen.getByRole('button', { name: /search/i })
 		const input = screen.getByRole('textbox')
 		fireEvent.change(input, { target: { value: /denver/i } })
+		const searchButton = screen.getByRole('button', { name: /search/i })
 		fireEvent.click(searchButton)
 		expect(getBreweriesByCity).toBeCalledTimes(1)
+	})
+
+	it('Should notify the user if the city is invalid', async () => {
+		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
+		getBreweriesByCity.mockResolvedValue([])
+		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
+		const input = screen.getByRole('textbox')
+		fireEvent.change(input, { target: { value: /fsdjhgfjhds/i } })
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		const errorMessage = await findByText(/invalid entry/i)
+		expect(errorMessage).toBeInTheDocument()
 	})
 
 })
