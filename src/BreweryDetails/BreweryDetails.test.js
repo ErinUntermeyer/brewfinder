@@ -32,11 +32,12 @@ describe('BreweryDetails Component', () => {
 					show={true}
 					handleClose={jest.fn()}
 					brewery={brewery}
-					favorites={[]}
+					favoriteIds={[]}
 					addFavorite={jest.fn()}
 					removeFavorite={jest.fn()}
 				/>
-			</MemoryRouter>)
+			</MemoryRouter>
+		)
 		const name = screen.getByRole('heading', { name: /just the brew you\'re looking for/i})
 		const address = screen.getByText(/555 brew st/i)
 		const phone = screen.getByText(/123-456-7890/i)
@@ -52,11 +53,12 @@ describe('BreweryDetails Component', () => {
 					show={true}
 					handleClose={jest.fn()}
 					brewery={brewery}
-					favorites={[]}
+					favoriteIds={[]}
 					addFavorite={jest.fn()}
 					removeFavorite={jest.fn()}
 				/>
-			</MemoryRouter>)
+			</MemoryRouter>
+		)
 			const websiteLink = screen.getByRole('link', { name: /view website/i})
 			const favoriteButton = screen.getByRole('button', { name: /add to favorites/i})
 			const closeButton = screen.getByRole('button', { name: /close/i})
@@ -73,20 +75,71 @@ describe('BreweryDetails Component', () => {
 					show={true}
 					handleClose={handleClose}
 					brewery={brewery}
-					favorites={[]}
+					favoriteIds={[]}
 					addFavorite={jest.fn()}
 					removeFavorite={jest.fn()}
 				/>
-			</MemoryRouter>)
+			</MemoryRouter>
+		)
 		const closeButton = screen.getByRole('button', { name: /close/i })
 		expect(closeButton).toBeInTheDocument()
 		fireEvent.click(closeButton)
 		expect(handleClose).toBeCalledTimes(1)
 	})
 
-	it('Should fire the correct method when favorite/unfavorite clicked', () => {
-		// need to get the bug out when next page clicked before testing
-		// may need to move things around
+	it('Should fire the correct method when add to favorites clicked', () => {
+		const addFavorite = jest.fn()
+		render(
+			<MemoryRouter>
+				<BreweryDetails
+					show={true}
+					handleClose={jest.fn()}
+					brewery={brewery}
+					favoriteIds={[]}
+					addFavorite={addFavorite}
+					removeFavorite={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const addFavoriteButton = screen.getByRole('button', { name: /add to favorites/i })
+		fireEvent.click(addFavoriteButton)
+		expect(addFavorite).toBeCalledTimes(1)
+	})
+
+	it('Should fire the correct method when unfavorite clicked', () => {
+		const removeFavorite = jest.fn()
+		render(
+			<MemoryRouter>
+				<BreweryDetails
+					show={true}
+					handleClose={jest.fn()}
+					brewery={brewery}
+					favoriteIds={[1234]}
+					addFavorite={jest.fn()}
+					removeFavorite={removeFavorite}
+				/>
+			</MemoryRouter>
+		)
+		const removeFavoriteButton = screen.getByRole('button', { name: /unfavorite/i })
+		fireEvent.click(removeFavoriteButton)
+		expect(removeFavorite).toBeCalledTimes(1)
+	})
+
+	it('Should link to the brewery website', () => {
+		render(
+			<MemoryRouter>
+				<BreweryDetails
+					show={true}
+					handleClose={jest.fn()}
+					brewery={brewery}
+					favoriteIds={[]}
+					addFavorite={jest.fn()}
+					removeFavorite={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const websiteLink = screen.getByRole('link', { name: /view website/i })
+		expect(websiteLink.getAttribute('href')).toBe('http://www.brewrific.com')
 	})
 	
 })

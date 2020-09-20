@@ -1,7 +1,7 @@
 import React from 'react'
 import Filter from './Filter'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent, findByText } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Filter Component', () => {
@@ -36,7 +36,7 @@ describe('Filter Component', () => {
 		expect(all).toBeInTheDocument()
 	})
 
-	it('Should fire the correct method when button clicked', () => {
+	it('Should fire the correct method when type button clicked', () => {
 		const setStateByType = jest.fn()
 		render(
 			<MemoryRouter>
@@ -71,6 +71,42 @@ describe('Filter Component', () => {
 		expect(searchField).toBeInTheDocument()
 	})
 
+	it('Should fire the correct methods when search button clicked', () => {
+		const filterBreweriesByCity = jest.fn()
+		render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={filterBreweriesByCity}
+					city={'Denver'}
+					clearCityFromState={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		expect(filterBreweriesByCity).toBeCalledTimes(1)
+	})
+
+	it('Should fire the correct methods when reset button clicked', () => {
+		const clearCityFromState = jest.fn()
+		render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'Denver'}
+					clearCityFromState={clearCityFromState}
+				/>
+			</MemoryRouter>
+		)
+		const resetButton = screen.getByRole('button', { name: /reset/i })
+		fireEvent.click(resetButton)
+		expect(clearCityFromState).toBeCalledTimes(1)
+	})
+
 	it('Should display the search input below search field', async () => {
 		const { findByText } = render(
 			<MemoryRouter>
@@ -89,6 +125,26 @@ describe('Filter Component', () => {
 		fireEvent.click(searchButton)
 		const description = await findByText(/current city: denver/i)
 		expect(description).toBeInTheDocument()
+	})
+
+	it('Should display invalid search if there are no results', async () => {
+		const { findByText } = render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'invalid entry'}
+					clearCityFromState={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const searchField = screen.getByRole('textbox')
+		fireEvent.change(searchField, { target: { value: /dskjfhsdj/i } })
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		const warning = await findByText(/invalid entry/i)
+		expect(warning).toBeInTheDocument()
 	})
 
 })

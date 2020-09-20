@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import cheers from '../assets/cheers.png'
 import './Favorites.scss'
 
-import { favorites } from '../helpers/data'
-
 const Favorites = ({ favoriteBreweriesData, removeFavorite }) => {
 
 	const favoritesList = favoriteBreweriesData.map(favorite => {
