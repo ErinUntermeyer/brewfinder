@@ -29,5 +29,17 @@ describe('About Component', () => {
 		expect(relatedLinksSection).toBeInTheDocument()
 		expect(creditsSection).toBeInTheDocument()
 	})
+
+	it('Should allow a user to view related links', () => {
+		render(<MemoryRouter><About /></MemoryRouter>)
+		const coloradoBeerEvents = screen.getByRole('link', { name: /colorado beer events/i })
+		const durangoBrewTrain = screen.getByRole('link', { name: /durango brew train/i })
+		const denverBeerTrail = screen.getByRole('link', { name: /denver beer trail/i })
+		const coloradoBeerFests = screen.getByRole('link', { name: /colorado beer festivals/i })
+		expect(coloradoBeerEvents.getAttribute('href')).toBe('https://coloradobeer.org/events/')
+		expect(durangoBrewTrain.getAttribute('href')).toBe('https://www.colorado.com/events/durango-brew-train')
+		expect(denverBeerTrail.getAttribute('href')).toBe('https://www.denver.org/restaurants/denver-bars-clubs/denver-beer-trail/')
+		expect(coloradoBeerFests.getAttribute('href')).toBe('https://beerfests.com/us/colorado-beer-festivals/')
+	})
 	
 })
