@@ -85,7 +85,7 @@ class App extends Component {
 				}
 			})
 			.catch(error => {
-				this.setState({ error: 'I\'m sorry, there are no breweries listed for that city. Please try another one!' })
+				this.setState({ error: 'I\'m sorry, we could not retrieve any breweries at this time. Please try again later!' })
 			})
 	}
 

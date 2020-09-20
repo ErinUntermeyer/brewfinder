@@ -1,7 +1,7 @@
 import React from 'react'
 import App from './App'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen, fireEvent, findByText } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { get20BreweriesByPage, getBreweriesByType, getBreweriesByCity } from '../helpers/apiCalls'
 import { breweries } from '../helpers/data'
@@ -114,7 +114,7 @@ describe('App Component', () => {
 		expect(title2).toBeInTheDocument()
 	})
 
-	it('Should display error if fetch is not successful', async () => {
+	it('Should display error if brewery fetch is not successful', async () => {
 		get20BreweriesByPage.mockRejectedValueOnce(404)
 		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
 		const error = await findByText(/i\'m sorry, we could not retrieve any breweries at this time. please try again later!/i)
@@ -244,6 +244,15 @@ describe('App Component', () => {
 		expect(getBreweriesByType).toBeCalledTimes(1)
 	})
 
+	it('Should display error if type fetch is not successful', async () => {
+		getBreweriesByType.mockRejectedValueOnce(404)
+		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
+		const microButton = screen.getByRole('button', { name: /micro/i })
+		fireEvent.click(microButton)
+		const error = await findByText(/i\'m sorry, we could not retrieve any breweries at this time. please try again later!/i)
+		expect(error).toBeInTheDocument()
+	})
+
 	it('Should allow a user to search by city', async () => {
 		get20BreweriesByPage.mockResolvedValueOnce(mockedBreweries)
 		getBreweriesByCity.mockResolvedValue(mockedBreweriesByCity)
@@ -265,6 +274,17 @@ describe('App Component', () => {
 		fireEvent.click(searchButton)
 		const errorMessage = await findByText(/invalid entry/i)
 		expect(errorMessage).toBeInTheDocument()
+	})
+
+	it('Should display error if city fetch is not successful', async () => {
+		getBreweriesByCity.mockRejectedValueOnce(404)
+		const { findByText } = render(<MemoryRouter><App /></MemoryRouter>)
+		const input = screen.getByRole('textbox')
+		fireEvent.change(input, { target: { value: /denver/i } })
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		const error = await findByText(/i\'m sorry, we could not retrieve any breweries at this time. please try again later!/i)
+		expect(error).toBeInTheDocument()
 	})
 
 })
