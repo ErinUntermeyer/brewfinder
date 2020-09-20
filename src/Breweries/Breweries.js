@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import BreweryDetails from '../BreweryDetails/BreweryDetails'
 import './Breweries.scss'
 
@@ -74,3 +75,11 @@ class Breweries extends Component {
 }
 
 export default Breweries
+
+Breweries.propTypes = {
+	breweries: PropTypes.array.isRequired,
+	changePage: PropTypes.func.isRequired,
+	favoriteIds: PropTypes.array,
+	addFavorite: PropTypes.func.isRequired,
+	removeFavorite: PropTypes.func.isRequired
+}
