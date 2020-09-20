@@ -65,14 +65,14 @@ class Filter extends Component {
 					<form
 						className='search-form'
 						onSubmit={(e) => this.handleSubmit(e)}>
-						<label htmlFor='search'>search by city</label>
+						<label htmlFor="search">search by city</label>
 						<input
-							className='search-input'
-							type='text'
-							id='search'
+							className="search-input"
+							type="text"
+							id="search"
 							value={this.state.input}
 							onChange={(e) => this.handleInput(e)}/>
-						<button type='submit' className="search-button">search</button>
+						<button type="submit" className="search-button">search</button>
 						<button onClick={(e) => this.props.clearCityFromState()} className="clear-button">reset</button>
 						{this.props.city !== "" && <p className="current-filter">current city: {this.props.city}</p>}
 					</form>
