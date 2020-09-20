@@ -127,4 +127,24 @@ describe('Filter Component', () => {
 		expect(description).toBeInTheDocument()
 	})
 
+	it('Should display invalid search if there are no results', async () => {
+		const { findByText } = render(
+			<MemoryRouter>
+				<Filter
+					setStateByType={jest.fn()}
+					type={'micro'}
+					filterBreweriesByCity={jest.fn()}
+					city={'invalid entry'}
+					clearCityFromState={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const searchField = screen.getByRole('textbox')
+		fireEvent.change(searchField, { target: { value: /dskjfhsdj/i } })
+		const searchButton = screen.getByRole('button', { name: /search/i })
+		fireEvent.click(searchButton)
+		const warning = await findByText(/invalid entry/i)
+		expect(warning).toBeInTheDocument()
+	})
+
 })
