@@ -6,7 +6,7 @@
 # brewfinder
 
 - This was a solo project built in 6 days during Mod 3 at Turing School of Software and Design
-- [View deployed](https://brewfinder-untermeyer.herokuapp.com/)
+[Take it for a spin!](https://brewfinder-untermeyer.herokuapp.com/)
 
 ## Table of Contents
 
