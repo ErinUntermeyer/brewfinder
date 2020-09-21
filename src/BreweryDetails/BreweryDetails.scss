@@ -108,3 +108,39 @@
 	height: 3vh;
 	margin: 0 10px -6.5px 0;
 }
+
+@media screen and (max-width: 1200px) and (min-width: 950px) {
+	.Brewery-details {
+		width: 70%;
+		height: 45%;
+	}
+}
+
+@media screen and (max-width: 950px) and (min-width: 830px) {
+	.Brewery-details {
+		width: 80%;
+		height: 45%;
+	}
+}
+
+@media screen and (max-width: 830px) {
+	.Brewery-details {
+		width: 80%;
+		height: 45%;
+	}
+
+	.details-button-box {
+		flex-direction: column;
+	}
+
+	.details-button-box button, .details-button-box a {
+		height: 30px;
+		font-size: 18px;
+		border-radius: 8px;
+    margin: 2px;
+	}
+
+	.details-button-box a {
+		padding: 4px;
+	}
+}
