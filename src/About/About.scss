@@ -44,3 +44,15 @@
 .title-word {
 	@include headerFont(32px);
 }
+
+@media screen and (max-width: 800px) and (min-width: 650px) {
+	.About {
+		margin: 20px 20px 0 20px;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.About {
+		margin: 10px 10px 0 10px;
+	}
+}
