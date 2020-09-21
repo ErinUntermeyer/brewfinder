@@ -309,3 +309,15 @@ describe('App Component', () => {
 	})
 
 })
+
+describe('Welcome', () => {
+
+	it('Should display a welcome message upon load', async () => {
+		render(<MemoryRouter><App /></MemoryRouter>)
+		const messageTitle = screen.getByRole('heading', { name: /welcome to/i })
+		const message = screen.getByText(/are you an avid beer lover?/i)
+		expect(messageTitle).toBeInTheDocument()
+		expect(message).toBeInTheDocument()
+	})
+
+})
