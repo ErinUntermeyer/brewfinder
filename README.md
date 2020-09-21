@@ -39,11 +39,20 @@
 
 ## Preview
 
-- Using the favorite/unfavorite feature
 - Viewing brewery details
+<img src="http://g.recordit.co/jiUrDBnDnc.gif" alt="Viewing brewery details" height=auto width=75%/>
+
+- Using the favorite/unfavorite feature
+<img src="http://g.recordit.co/iirBRhEjGA.gif" alt="Using the favorite/unfavorite feature" height=auto width=75%/>
+
 - Viewing the brewery website
+<img src="http://g.recordit.co/wzdDM5CowI.gif" alt="Viewing the brewery website" height=auto width=75%/>
+
 - Filtering by type
+<img src="http://g.recordit.co/VBw2GrZ1Wi.gif" alt="Filtering by type" height=auto width=75%/>
+
 - Searching by city
+<img src="http://g.recordit.co/NTMPbyf0Mc.gif" alt="Searching by city" height=auto width=75%/>
 
 ## Next Steps
 
