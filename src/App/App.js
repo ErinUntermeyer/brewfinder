@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { get20BreweriesByPage, getBreweriesByType, getBreweriesByCity } from '../helpers/apiCalls'
 import Header from '../Header/Header'
+import Welcome from '../Welcome/Welcome'
 import About from '../About/About'
 import Favorites from '../Favorites/Favorites'
 import Breweries from '../Breweries/Breweries'
@@ -19,7 +20,8 @@ class App extends Component {
 			type: '',
 			city: '',
 			warning: '',
-			error: ''
+			error: '',
+			firstLoad: true
 		}
 	}
 
@@ -93,6 +95,10 @@ class App extends Component {
 		this.setState({ city: '' })
 	}
 
+	closeWelcome = () => {
+		this.setState({ firstLoad: false })
+	}
+
 	changePage = direction => {
 		if (direction === 'back' && this.state.pageNumber === 1) {
 			this.displayWarning('You\'re on the first page!')
@@ -129,7 +135,12 @@ class App extends Component {
 		<div className="App">
 			<Header />
 			<main>
-				{ this.state.error ? <h1 className="error">{this.state.error}</h1> : (
+				{ this.state.firstLoad ?
+				<Welcome
+					firstLoad={this.state.firstLoad}
+					closeWelcome={this.closeWelcome}
+				/> : null }
+				{ this.state.error || this.state.firstLoad ? <h1 className="error">{this.state.error}</h1> : (
 				<Route exact path="/" render={() => (
 					<>
 						<Filter 
