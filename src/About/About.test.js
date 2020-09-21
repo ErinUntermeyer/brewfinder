@@ -1,7 +1,7 @@
 import React from 'react'
 import About from './About'
 import { MemoryRouter } from 'react-router-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('About Component', () => {
@@ -20,7 +20,7 @@ describe('About Component', () => {
 
 	it('Should display information in each section', () => {
 		render(<MemoryRouter><About /></MemoryRouter>)
-		const summarySection = screen.getByText(/designed for the avid beer lovers/i)
+		const summarySection = screen.getByText(/designed for avid beer lovers/i)
 		const definitionsSection = screen.getByText(/combination of a brewery and/i)
 		const relatedLinksSection = screen.getByRole('link', { name: /durango brew train/i })
 		const creditsSection = screen.getByRole('link', { name: /open brewery db/i })
