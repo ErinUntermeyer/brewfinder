@@ -69,3 +69,42 @@
 		color: $grey
 	}
 }
+
+@media screen and (max-width: 1000px) and (min-width: 800px) {
+	.Breweries {
+		margin: 30px 75px 0 75px;
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.page-button-box {
+		display: flex;
+		justify-content: center;
+		margin: 0;
+	}
+}
+
+@media screen and (max-width: 800px) and (min-width: 650px) {
+	.Breweries {
+		margin: 30px 75px 0 75px;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.page-button-box {
+		display: flex;
+		justify-content: center;
+		margin: 0;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.Breweries {
+		margin: 10px 50px 0 50px;
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.page-button-box {
+		display: flex;
+		justify-content: center;
+		margin: 0;
+	}
+}

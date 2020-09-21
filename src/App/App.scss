@@ -31,3 +31,15 @@
 	font-size: 16px;
 	color: $bone;
 }
+
+@media screen and (max-width: 1000px) and (min-width: 650px) {
+	.App {
+		height: 275vh;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.App {
+		height: 600vh;
+	}
+}
