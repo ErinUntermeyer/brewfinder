@@ -70,3 +70,31 @@
 		filter: drop-shadow(0px 0px 4px $golden);
 	}
 }
+
+@media screen and (max-width: 1200px) and (min-width: 950px) {
+	.Welcome {
+		width: 70%;
+		height: 45%;
+	}
+}
+
+@media screen and (max-width: 950px) and (min-width: 830px) {
+	.Welcome {
+		width: 80%;
+		height: 45%;
+	}
+}
+
+@media screen and (max-width: 830px) and (min-width: 650px) {
+	.Welcome {
+		width: 80%;
+		height: 45%;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.Welcome {
+		width: 80%;
+		height: 95%;
+	}
+}
