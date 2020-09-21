@@ -57,3 +57,37 @@ Header a {
 .favorite-box {
 	align-self: center;
 }
+
+@media screen and (max-width: 800px) and (min-width: 650px) {
+	Header {
+		flex-direction: column;;
+		height: 18vh;
+	}
+
+	nav {
+		justify-content: center;
+	}
+
+	.slogan {
+		margin: 0
+	}
+}
+
+@media screen and (max-width: 650px) {
+	Header {
+		flex-direction: column;;
+		height: 18vh;
+	}
+
+	nav {
+		justify-content: center;
+	}
+
+	Header a {
+		@include textFont(20px);
+	}
+
+	.slogan {
+		margin: 0
+	}
+}
