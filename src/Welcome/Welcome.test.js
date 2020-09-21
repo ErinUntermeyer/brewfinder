@@ -33,5 +33,20 @@ describe('Welcome Component', () => {
 		const button = screen.getByRole('button', { name: /get started/i })
 		expect(button).toBeInTheDocument()
 	})
+
+	it('Should fire the correct method when button clicked', () => {
+		const closeWelcome = jest.fn()
+		render(
+			<MemoryRouter>
+				<Welcome
+					firstLoad={true}
+					closeWelcome={closeWelcome}
+				/>
+			</MemoryRouter>
+		)
+		const button = screen.getByRole('button', { name: /get started/i })
+		fireEvent.click(button)
+		expect(closeWelcome).toBeCalledTimes(1)
+	})
 	
 })
