@@ -53,6 +53,10 @@ class App extends Component {
 		}
 	}
 
+	componentWillUnmount = () => {
+		clearTimeout(this.interval)
+	}
+
 	getBreweries = () => {
 		get20BreweriesByPage(this.state.pageNumber)
 			.then(data => {
@@ -125,7 +129,7 @@ class App extends Component {
 
 	displayWarning = message => {
 		this.setState({ warning: message })
-		setTimeout(() => {
+		this.interval = setTimeout(() => {
 			this.setState({ warning: '' })
 		}, 1000)
 	}
