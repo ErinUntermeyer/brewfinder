@@ -320,4 +320,30 @@ describe('Welcome', () => {
 		expect(message).toBeInTheDocument()
 	})
 
+	it('Should fetch breweries when user clicks get started', async () => {
+		get20BreweriesByPage.mockClear()
+		get20BreweriesByPage.mockResolvedValueOnce([
+			{
+				"id": 1111,
+				"name": "The Final Countdown",
+				"brewery_type": "micro",
+				"street": "1111 You're almost done",
+				"city": "Final Stretch",
+				"state": "Colorado",
+				"postal_code": "80111",
+				"country": "United States",
+				"longitude": "-45",
+				"latitude": "68",
+				"phone": "5555555555",
+				"website_url": "http://www.hanginthere.com",
+				"updated_at": "now"
+			}
+		])
+		const { findByRole } = render(<MemoryRouter><App /></MemoryRouter>)
+		fireEvent.click(await findByRole('button', { name: /get started/i }))
+		expect(get20BreweriesByPage).toBeCalledTimes(1)
+		const title = await findByRole('heading', { name: /the final countdown/i })
+		expect(title).toBeInTheDocument()
+	})
+
 })
