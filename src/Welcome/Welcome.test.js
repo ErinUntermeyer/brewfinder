@@ -20,5 +20,18 @@ describe('Welcome Component', () => {
 		expect(title).toBeInTheDocument()
 		expect(message).toBeInTheDocument()
 	})
+
+	it('Should display a get started button', () => {
+		render(
+			<MemoryRouter>
+				<Welcome
+					firstLoad={true}
+					closeWelcome={jest.fn()}
+				/>
+			</MemoryRouter>
+		)
+		const button = screen.getByRole('button', { name: /get started/i })
+		expect(button).toBeInTheDocument()
+	})
 	
 })
