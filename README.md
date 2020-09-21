@@ -29,6 +29,10 @@
 
 ## Install/Setup Instructions
 
+- [View deployed](https://brewfinder-untermeyer.herokuapp.com/)
+
+OR
+
 - Clone the repo using `git clone` in your terminal
 - `cd` into the directory
 - Run `npm install` to install the required dependencies
