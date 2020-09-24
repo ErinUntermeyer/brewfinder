@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - "node"
+- node
 notifications:
   email: false
 deploy:
   provider: heroku
   api_key:
-    secure: 37945739-e7aa-42bc-b97d-a7550c6a8934
+    secure: qvI4/kgUru3+JFXtZad4hf37DQZpWmZ0t60dQcEvhZJ1qQ0NgnplWsDVlvb+bq6ykZ/wwxEC6MfrpS/pFChzNF6OXP1smoMcKi8RGNpS8RG/jnyoKABvj7pYfqcIPtvcqIlxJRfWzKaSioZvDfhnvDiqHLDkWYHLknDAxlhkftwvp1htaQsc/BzbbL3PmcTgQ9Mi+QhD2C7IuwsMmpE1PK2vDe9rzSi0wKBZ5o3QVxP8+kdkPEjOI42JKWPufD8+BshBfhZVGuwDVoKpxc+/j6NyTDNrmdO2x3Q4j+kbMUtJoZLWYr7CTi+ka90vRACRXRuuePdSJf7myWefwmklmyoK64scV9wAzRDnkDq/S5SVnTVrXFaEShx7oh8cv7JfVVbdqROdQnxp7+q+VF15ncYTV/CUz1qLjLhgisBBx8Fwi3M6onmEAmiiDtrtsNKlZKWj9gTmN9ERcj56CKkzYwORKPXF2ROtVIrXCmmJr2yfuLDAiB6HBlm420JyQlSy7G6Yg6t/hFthHHqGLrZKFSrxqM5i2oV8v6BfWtWdbi/L9bFr4zYjDoQDJz2XiFe6tiXiyMO6bPx48feOj5v6B2djasSrVDh7Ie3+3ogxEttfKoXcz/2IwACazIghqfDnwJZpkIwGPJDMQNL/eLShhIRyeSAxCJzmenkaR5ftG0k=
   app: brewfinder-untermeyer
   skip_cleanup: true
