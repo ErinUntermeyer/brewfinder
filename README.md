@@ -70,9 +70,6 @@ OR
 - All data is from the [Open Brewery DB](https://www.openbrewerydb.org/) API
 - [FlatIcon](https://www.flaticon.com/home)
 
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/ErinUntermeyer/brewfinder.svg?style=flat-square
 [contributors-url]: https://github.com/ErinUntermeyer/brewfinder/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ErinUntermeyer/brewfinder.svg?style=flat-square
