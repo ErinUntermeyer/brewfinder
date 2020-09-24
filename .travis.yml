@@ -6,6 +6,6 @@ notifications:
 deploy:
   provider: heroku
   api_key:
-    secure: "37945739-e7aa-42bc-b97d-a7550c6a8934"
+    secure: 37945739-e7aa-42bc-b97d-a7550c6a8934
   app: brewfinder-untermeyer
   skip_cleanup: true
