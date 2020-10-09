@@ -14,9 +14,9 @@
 	background: $teal;
 	border-radius: 15px;
   width: 60%;
-  height: 40%;
-  top:50%;
-  left:50%;
+  height: 45%;
+  top: 50%;
+  left: 50%;
 	transform: translate(-50%,-50%);
 	display: flex;
 	flex-direction: column;
@@ -105,28 +105,28 @@
 }
 
 .cheers-details {
-	height: 3vh;
+	height: 26px;
 	margin: 0 10px -6.5px 0;
 }
 
 @media screen and (max-width: 1200px) and (min-width: 950px) {
 	.Brewery-details {
 		width: 70%;
-		height: 45%;
+		height: 50%;
 	}
 }
 
 @media screen and (max-width: 950px) and (min-width: 830px) {
 	.Brewery-details {
 		width: 80%;
-		height: 45%;
+		height: 55%;
 	}
 }
 
 @media screen and (max-width: 830px) {
 	.Brewery-details {
 		width: 80%;
-		height: 45%;
+		height: 70%;
 	}
 
 	.details-button-box {
@@ -145,7 +145,7 @@
 	}
 
 	.cheers-details {
-    height: 2.5vh;
+    height: 26px;
     margin: -5px 10px -6.5px 0;
 	}
 }
